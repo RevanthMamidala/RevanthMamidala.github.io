@@ -35,9 +35,13 @@
             text-decoration: none;
             margin: 0 15px;
             font-size: 1.2rem;
+            cursor: pointer;
         }
         nav a:hover {
             text-decoration: underline;
+        }
+        #content {
+            padding: 40px;
         }
         footer {
             background-color: #f9f9f0;
@@ -64,6 +68,24 @@
             text-decoration: underline;
         }
     </style>
+    <script>
+        async function loadContent(page) {
+            const response = await fetch(page);
+            const content = await response.text();
+            document.getElementById('content').innerHTML = content;
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            loadContent('about_me_section.html'); // Load default content (Home/About Me)
+            const links = document.querySelectorAll('nav a');
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = link.getAttribute('href');
+                    loadContent(page);
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -78,7 +100,9 @@
         <a href="publications_section.html">Publications</a>
         <a href="others_section.html">Others</a>
     </nav>
-
+    <div id="content">
+        <!-- Content for each section will be dynamically loaded here -->
+    </div>
     <footer>
         <div class="contact-info">
             <div>
