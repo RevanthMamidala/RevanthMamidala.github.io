@@ -134,7 +134,7 @@
             </ul>
         </div>
     </div>
-    
+
     <div class="latest-content">
         <h3>Latest Content</h3>
         <ul>
@@ -156,9 +156,8 @@
         const imageNames = ['1Z0A6122.jpg', '20230618_131906.jpg', '1000003650.JPEG', 'Revanth Formal Image.jpeg'];
         const galleryContainer = document.getElementById('photoGallery');
         let slideIndex = 1;
-        let images = []; // Initialize images array
+        let images = [];
 
-        // Function to show slides
         function showSlides(n) {
             if (n > images.length) slideIndex = 1;
             if (n < 1) slideIndex = images.length;
@@ -169,22 +168,22 @@
             galleryContainer.style.transform = `translateX(-${(slideIndex - 1) * 220}px)`;
         }
 
-        // Function to create and append images
         function createImages() {
             let imagesLoaded = 0;
             imageNames.forEach((image, index) => {
                 const img = document.createElement('img');
                 img.src = `${galleryPath}${image}`;
                 img.alt = `Image ${index + 1}`;
-                img.className = 'photo-gallery-slide'; // Add the correct class
+                img.className = 'photo-gallery-slide';
                 if (index === 1) {
                     img.classList.add('center');
                 }
+
                 img.onload = () => {
                     galleryContainer.appendChild(img);
                     imagesLoaded++;
                     if (imagesLoaded === imageNames.length) {
-                        images = document.querySelectorAll('.photo-gallery-slide');
+                        images = document.querySelectorAll('.photo-gallery-slide'); // Correctly select images after they are loaded
                         showSlides(slideIndex);
                     }
                 };
@@ -199,7 +198,7 @@
             });
         }
 
-        // Event listeners for arrows
+
         document.querySelector('.arrow-left').addEventListener('click', () => {
             slideIndex--;
             showSlides(slideIndex);
@@ -210,8 +209,13 @@
             showSlides(slideIndex);
         });
 
-        // Start creating images
-        createImages();
+        // Call createImages only after the DOM is fully loaded in the included file
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', createImages);
+        } else {
+            createImages();
+        }
+
     </script>
 </body>
 </html>
