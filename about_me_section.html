@@ -152,28 +152,13 @@
     </div>
 
     <script>
-        const galleryPath = 'https://raw.githubusercontent.com/RevanthMamidala/RevanthMamidala.github.io/main/PhotoGallery/'; // Corrected path
-        const imageNames = ['1Z0A6122.jpg', '20230618_131906.jpg', '1000003650.JPEG', 'Revanth Formal Image.jpeg']; // Add more image names here
+        const galleryPath = 'https://raw.githubusercontent.com/RevanthMamidala/RevanthMamidala.github.io/main/PhotoGallery/';
+        const imageNames = ['1Z0A6122.jpg', '20230618_131906.jpg', '1000003650.JPEG', 'Revanth Formal Image.jpeg'];
         const galleryContainer = document.getElementById('photoGallery');
-
-        // Dynamically create image elements
-        imageNames.forEach((image, index) => {
-            const img = document.createElement('img');
-            img.src = `${galleryPath}${image}`; // Construct the correct URL
-            img.alt = `Image ${index + 1}`;
-            img.className = index === 1 ? 'center' : ''; // Make the second image the center by default
-            img.onload = () => { // Add onload event to handle image loading
-                galleryContainer.appendChild(img);
-                if (index === 0) showSlides(slideIndex); // Show initial slide after first image loads
-            };
-            img.onerror = () => {
-                console.error(`Error loading image: ${image}`); // Handle errors
-            }
-        });
-
         let slideIndex = 1;
-        const images = document.querySelectorAll('.photo-gallery-slide img');
+        let images = []; // Initialize images array
 
+        // Function to show slides
         function showSlides(n) {
             if (n > images.length) slideIndex = 1;
             if (n < 1) slideIndex = images.length;
@@ -184,6 +169,37 @@
             galleryContainer.style.transform = `translateX(-${(slideIndex - 1) * 220}px)`;
         }
 
+        // Function to create and append images
+        function createImages() {
+            let imagesLoaded = 0;
+            imageNames.forEach((image, index) => {
+                const img = document.createElement('img');
+                img.src = `${galleryPath}${image}`;
+                img.alt = `Image ${index + 1}`;
+                img.className = 'photo-gallery-slide'; // Add the correct class
+                if (index === 1) {
+                    img.classList.add('center');
+                }
+                img.onload = () => {
+                    galleryContainer.appendChild(img);
+                    imagesLoaded++;
+                    if (imagesLoaded === imageNames.length) {
+                        images = document.querySelectorAll('.photo-gallery-slide');
+                        showSlides(slideIndex);
+                    }
+                };
+                img.onerror = () => {
+                    console.error(`Error loading image: ${image}`);
+                    imagesLoaded++;
+                    if (imagesLoaded === imageNames.length) {
+                        images = document.querySelectorAll('.photo-gallery-slide');
+                        showSlides(slideIndex);
+                    }
+                };
+            });
+        }
+
+        // Event listeners for arrows
         document.querySelector('.arrow-left').addEventListener('click', () => {
             slideIndex--;
             showSlides(slideIndex);
@@ -194,7 +210,8 @@
             showSlides(slideIndex);
         });
 
-        showSlides(slideIndex);
+        // Start creating images
+        createImages();
     </script>
 </body>
 </html>
