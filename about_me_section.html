@@ -193,12 +193,16 @@
 
     <script>
         const galleryPath = 'https://raw.githubusercontent.com/RevanthMamidala/RevanthMamidala.github.io/main/PhotoGallery/';
-        const imageNames = ['1Z0A6122.jpg', '20230618_131906.jpg', '1000003650.JPEG', 'Revanth Formal Image.jpeg'];
+        const repoApiUrl = 'https://api.github.com/repos/RevanthMamidala/RevanthMamidala.github.io/contents/PhotoGallery';
+        const maxImages = 10; // Maximum number of images to display (set to 0 for no limit)
+        const supportedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg'];
+        
         const galleryContainer = document.getElementById('photoGallery');
         const indicatorsContainer = document.getElementById('indicators');
         let slideIndex = 0;
         let images = [];
         let loadedImages = 0;
+        let imageNames = [];
 
         function showSlide(n) {
             if (images.length === 0) return;
@@ -236,8 +240,68 @@
             showSlide(slideIndex);
         }
 
+        function isImageFile(filename) {
+            const extension = filename.split('.').pop().toLowerCase();
+            return supportedExtensions.includes(extension);
+        }
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        async function fetchImageList() {
+            try {
+                galleryContainer.innerHTML = '<div class="loading-message">Loading gallery...</div>';
+                
+                const response = await fetch(repoApiUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const files = await response.json();
+                
+                // Filter image files
+                let imageFiles = files
+                    .filter(file => file.type === 'file' && isImageFile(file.name))
+                    .map(file => file.name);
+                
+                // Shuffle for variety (optional)
+                imageFiles = shuffleArray(imageFiles);
+                
+                // Limit number of images if specified
+                if (maxImages > 0 && imageFiles.length > maxImages) {
+                    imageFiles = imageFiles.slice(0, maxImages);
+                }
+                
+                if (imageFiles.length === 0) {
+                    galleryContainer.innerHTML = '<div class="loading-message">No images found in the gallery folder.</div>';
+                    return;
+                }
+                
+                imageNames = imageFiles;
+                console.log(`Found ${imageNames.length} images:`, imageNames);
+                
+                createImages();
+                
+            } catch (error) {
+                console.error('Error fetching image list:', error);
+                galleryContainer.innerHTML = '<div class="loading-message">Error loading gallery. Using fallback images...</div>';
+                
+                // Fallback to your original image list
+                imageNames = ['1Z0A6122.jpg', '20230618_131906.jpg', '1000003650.JPEG', 'Revanth Formal Image.jpeg'];
+                setTimeout(createImages, 1000);
+            }
+        }
+
         function createImages() {
             galleryContainer.innerHTML = '';
+            images = [];
+            loadedImages = 0;
             
             imageNames.forEach((imageName, index) => {
                 const img = document.createElement('img');
@@ -295,9 +359,9 @@
 
         // Initialize gallery
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', createImages);
+            document.addEventListener('DOMContentLoaded', fetchImageList);
         } else {
-            createImages();
+            fetchImageList();
         }
     </script>
 </body>
