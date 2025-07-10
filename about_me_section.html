@@ -193,9 +193,18 @@
 
     <script>
         const galleryPath = 'https://raw.githubusercontent.com/RevanthMamidala/RevanthMamidala.github.io/main/PhotoGallery/';
-        const repoApiUrl = 'https://api.github.com/repos/RevanthMamidala/RevanthMamidala.github.io/contents/PhotoGallery';
         const maxImages = 10; // Maximum number of images to display (set to 0 for no limit)
-        const supportedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg'];
+        
+        // Define your image list here - update this when you add new images
+        const availableImages = [
+            Revanth_Mamidala - Copy.png,
+            Revanth_Mamidala.png,
+            '1Z0A6122.jpg',
+            '20230618_131906.jpg', 
+            '1000003650.JPEG',
+            'Revanth Formal Image.jpeg'
+            // Add more image names here as you upload them
+        ];
         
         const galleryContainer = document.getElementById('photoGallery');
         const indicatorsContainer = document.getElementById('indicators');
@@ -240,11 +249,6 @@
             showSlide(slideIndex);
         }
 
-        function isImageFile(filename) {
-            const extension = filename.split('.').pop().toLowerCase();
-            return supportedExtensions.includes(extension);
-        }
-
         function shuffleArray(array) {
             const shuffled = [...array];
             for (let i = shuffled.length - 1; i > 0; i--) {
@@ -254,83 +258,61 @@
             return shuffled;
         }
 
-        async function fetchImageList() {
-            try {
-                galleryContainer.innerHTML = '<div class="loading-message">Loading gallery...</div>';
-                
-                const response = await fetch(repoApiUrl);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                const files = await response.json();
-                
-                // Filter image files
-                let imageFiles = files
-                    .filter(file => file.type === 'file' && isImageFile(file.name))
-                    .map(file => file.name);
-                
-                // Shuffle for variety (optional)
-                imageFiles = shuffleArray(imageFiles);
-                
-                // Limit number of images if specified
-                if (maxImages > 0 && imageFiles.length > maxImages) {
-                    imageFiles = imageFiles.slice(0, maxImages);
-                }
-                
-                if (imageFiles.length === 0) {
-                    galleryContainer.innerHTML = '<div class="loading-message">No images found in the gallery folder.</div>';
-                    return;
-                }
-                
-                imageNames = imageFiles;
-                console.log(`Found ${imageNames.length} images:`, imageNames);
-                
-                createImages();
-                
-            } catch (error) {
-                console.error('Error fetching image list:', error);
-                galleryContainer.innerHTML = '<div class="loading-message">Error loading gallery. Using fallback images...</div>';
-                
-                // Fallback to your original image list
-                imageNames = ['1Z0A6122.jpg', '20230618_131906.jpg', '1000003650.JPEG', 'Revanth Formal Image.jpeg'];
-                setTimeout(createImages, 1000);
+        function initializeGallery() {
+            // Shuffle images for variety
+            let selectedImages = shuffleArray(availableImages);
+            
+            // Limit number of images if specified
+            if (maxImages > 0 && selectedImages.length > maxImages) {
+                selectedImages = selectedImages.slice(0, maxImages);
             }
+            
+            imageNames = selectedImages;
+            console.log(`Loading ${imageNames.length} images:`, imageNames);
+            
+            createImages();
         }
 
         function createImages() {
-            galleryContainer.innerHTML = '';
+            galleryContainer.innerHTML = '<div class="loading-message">Loading images...</div>';
             images = [];
             loadedImages = 0;
             
-            imageNames.forEach((imageName, index) => {
-                const img = document.createElement('img');
-                img.src = `${galleryPath}${imageName}`;
-                img.alt = `Gallery Image ${index + 1}`;
-                img.className = 'gallery-image';
+            // Clear the loading message when we start creating images
+            setTimeout(() => {
+                galleryContainer.innerHTML = '';
                 
-                img.onload = () => {
-                    loadedImages++;
-                    if (loadedImages === 1) {
-                        // Show first image immediately
-                        img.classList.add('active');
-                    }
-                    if (loadedImages === imageNames.length) {
-                        createIndicators();
-                    }
-                };
-                
-                img.onerror = () => {
-                    console.error(`Error loading image: ${imageName}`);
-                    loadedImages++;
-                    if (loadedImages === imageNames.length) {
-                        createIndicators();
-                    }
-                };
-                
-                galleryContainer.appendChild(img);
-                images.push(img);
-            });
+                imageNames.forEach((imageName, index) => {
+                    const img = document.createElement('img');
+                    img.src = `${galleryPath}${imageName}`;
+                    img.alt = `Gallery Image ${index + 1}`;
+                    img.className = 'gallery-image';
+                    
+                    img.onload = () => {
+                        loadedImages++;
+                        console.log(`Loaded image ${loadedImages}/${imageNames.length}: ${imageName}`);
+                        
+                        if (loadedImages === 1) {
+                            // Show first image immediately
+                            img.classList.add('active');
+                        }
+                        if (loadedImages === imageNames.length) {
+                            createIndicators();
+                        }
+                    };
+                    
+                    img.onerror = () => {
+                        console.error(`Error loading image: ${imageName}`);
+                        loadedImages++;
+                        if (loadedImages === imageNames.length) {
+                            createIndicators();
+                        }
+                    };
+                    
+                    galleryContainer.appendChild(img);
+                    images.push(img);
+                });
+            }, 100);
         }
 
         function createIndicators() {
@@ -359,9 +341,9 @@
 
         // Initialize gallery
         if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', fetchImageList);
+            document.addEventListener('DOMContentLoaded', initializeGallery);
         } else {
-            fetchImageList();
+            initializeGallery();
         }
     </script>
 </body>
