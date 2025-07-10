@@ -80,22 +80,28 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 250px;
             overflow: hidden;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .photo-gallery-slide {
             display: flex;
             transition: transform 0.5s ease-in-out;
+            height: 100%;
         }
-        .photo-gallery-slide img {
-            width: 200px;
-            height: 150px;
-            object-fit: cover;
-            margin: 0 10px;
-            transition: all 0.3s ease;
-        }
-        .photo-gallery-slide img.center {
+        .gallery-image {
             width: 300px;
             height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .gallery-image.active {
+            opacity: 1;
         }
         .arrow {
             position: absolute;
@@ -104,12 +110,43 @@
             font-size: 2rem;
             cursor: pointer;
             z-index: 10;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        .arrow:hover {
+            background-color: rgba(0, 0, 0, 0.7);
         }
         .arrow-left {
-            left: 0;
+            left: 20px;
         }
         .arrow-right {
-            right: 0;
+            right: 20px;
+        }
+        .gallery-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .indicator.active {
+            background-color: #3498db;
+        }
+        .loading-message {
+            text-align: center;
+            color: #666;
+            font-style: italic;
         }
     </style>
 </head>
@@ -119,7 +156,7 @@
     </header>
     <div class="container">
         <div class="profile-image">
-            <img src="Revanth_Mamidala.png" alt="Revanth Mamidala">
+            <img src="https://raw.githubusercontent.com/RevanthMamidala/RevanthMamidala.github.io/main/Revanth_Mamidala.png" alt="Revanth Mamidala">
             <h3>Revanth Mamidala</h3>
         </div>
         <div class="content">
@@ -145,77 +182,123 @@
     <div class="photo-gallery">
         <h3>Photo Gallery</h3>
         <div class="photo-gallery-container">
-            <span class="arrow arrow-left">&#9664;</span>
-            <div class="photo-gallery-slide" id="photoGallery"></div>
-            <span class="arrow arrow-right">&#9654;</span>
+            <button class="arrow arrow-left">&#9664;</button>
+            <div class="photo-gallery-slide" id="photoGallery">
+                <div class="loading-message">Loading images...</div>
+            </div>
+            <button class="arrow arrow-right">&#9654;</button>
         </div>
+        <div class="gallery-indicators" id="indicators"></div>
     </div>
 
     <script>
         const galleryPath = 'https://raw.githubusercontent.com/RevanthMamidala/RevanthMamidala.github.io/main/PhotoGallery/';
         const imageNames = ['1Z0A6122.jpg', '20230618_131906.jpg', '1000003650.JPEG', 'Revanth Formal Image.jpeg'];
         const galleryContainer = document.getElementById('photoGallery');
-        let slideIndex = 1;
+        const indicatorsContainer = document.getElementById('indicators');
+        let slideIndex = 0;
         let images = [];
+        let loadedImages = 0;
 
-        function showSlides(n) {
-            if (n > images.length) slideIndex = 1;
-            if (n < 1) slideIndex = images.length;
+        function showSlide(n) {
+            if (images.length === 0) return;
+            
+            if (n >= images.length) slideIndex = 0;
+            if (n < 0) slideIndex = images.length - 1;
 
-            images.forEach(img => img.classList.remove('center'));
-            images[slideIndex - 1].classList.add('center');
+            // Hide all images
+            images.forEach(img => img.classList.remove('active'));
+            
+            // Show current image
+            if (images[slideIndex]) {
+                images[slideIndex].classList.add('active');
+            }
 
-            galleryContainer.style.transform = `translateX(-${(slideIndex - 1) * 220}px)`;
-        }
-
-        function createImages() {
-            let imagesLoaded = 0;
-            imageNames.forEach((image, index) => {
-                const img = document.createElement('img');
-                img.src = `${galleryPath}${image}`;
-                img.alt = `Image ${index + 1}`;
-                img.className = 'photo-gallery-slide';
-                if (index === 1) {
-                    img.classList.add('center');
-                }
-
-                img.onload = () => {
-                    galleryContainer.appendChild(img);
-                    imagesLoaded++;
-                    if (imagesLoaded === imageNames.length) {
-                        images = document.querySelectorAll('.photo-gallery-slide'); // Correctly select images after they are loaded
-                        showSlides(slideIndex);
-                    }
-                };
-                img.onerror = () => {
-                    console.error(`Error loading image: ${image}`);
-                    imagesLoaded++;
-                    if (imagesLoaded === imageNames.length) {
-                        images = document.querySelectorAll('.photo-gallery-slide');
-                        showSlides(slideIndex);
-                    }
-                };
+            // Update indicators
+            const indicators = document.querySelectorAll('.indicator');
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === slideIndex);
             });
         }
 
-
-        document.querySelector('.arrow-left').addEventListener('click', () => {
-            slideIndex--;
-            showSlides(slideIndex);
-        });
-
-        document.querySelector('.arrow-right').addEventListener('click', () => {
+        function nextSlide() {
             slideIndex++;
-            showSlides(slideIndex);
+            showSlide(slideIndex);
+        }
+
+        function prevSlide() {
+            slideIndex--;
+            showSlide(slideIndex);
+        }
+
+        function goToSlide(n) {
+            slideIndex = n;
+            showSlide(slideIndex);
+        }
+
+        function createImages() {
+            galleryContainer.innerHTML = '';
+            
+            imageNames.forEach((imageName, index) => {
+                const img = document.createElement('img');
+                img.src = `${galleryPath}${imageName}`;
+                img.alt = `Gallery Image ${index + 1}`;
+                img.className = 'gallery-image';
+                
+                img.onload = () => {
+                    loadedImages++;
+                    if (loadedImages === 1) {
+                        // Show first image immediately
+                        img.classList.add('active');
+                    }
+                    if (loadedImages === imageNames.length) {
+                        createIndicators();
+                    }
+                };
+                
+                img.onerror = () => {
+                    console.error(`Error loading image: ${imageName}`);
+                    loadedImages++;
+                    if (loadedImages === imageNames.length) {
+                        createIndicators();
+                    }
+                };
+                
+                galleryContainer.appendChild(img);
+                images.push(img);
+            });
+        }
+
+        function createIndicators() {
+            indicatorsContainer.innerHTML = '';
+            imageNames.forEach((_, index) => {
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator';
+                if (index === 0) indicator.classList.add('active');
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicatorsContainer.appendChild(indicator);
+            });
+        }
+
+        // Event listeners
+        document.querySelector('.arrow-left').addEventListener('click', prevSlide);
+        document.querySelector('.arrow-right').addEventListener('click', nextSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
         });
 
-        // Call createImages only after the DOM is fully loaded in the included file
+        // Auto-slide (optional - uncomment to enable)
+        // setInterval(nextSlide, 5000);
+
+        // Initialize gallery
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', createImages);
         } else {
             createImages();
         }
-
     </script>
 </body>
 </html>
