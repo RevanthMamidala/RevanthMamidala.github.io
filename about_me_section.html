@@ -56,6 +56,44 @@
             margin-top: 20px;
             color: #1a5f7a;
         }
+        
+        .featured-content {
+            width: 80%;
+            margin: 10px auto 0 auto;
+            padding: 20px 0;
+            background: #eaf6fb;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.07);
+        }
+        .featured-items {
+            display: flex;
+            gap: 40px; /* Increased gap for better separation */
+            justify-content: center;
+            align-items: flex-start; /* Align to the top for better balance */
+        }
+        .featured-thumb {
+            width: 100%;
+            max-width: 340px; /* Poster will not exceed this width */
+            height: auto;
+            aspect-ratio: 3/4; /* Keeps poster aspect ratio, adjust as needed */
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.13);
+            margin-bottom: 8px;
+        }
+        .featured-poster {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 340px; /* Match the image max-width */
+        }
+        .featured-caption {
+            text-align: center;
+            color: #1a5f7a;
+            font-weight: 500;
+        }            
+        
         .latest-content, .photo-gallery {
             width: 80%;
             margin: auto;
@@ -75,79 +113,35 @@
             text-decoration: none;
             color: #3498db;
         }
-        .photo-gallery-container {
-            position: relative;
+        .latest-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .latest-item {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            height: 250px;
-            overflow: hidden;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
         }
-        .photo-gallery-slide {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-            height: 100%;
+        .latest-item a {
+            flex: 1;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
         }
-        .gallery-image {
-            width: 300px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+        .latest-date {
+            color: #888;
+            font-size: 0.95em;
+            margin-left: 20px;
+            white-space: nowrap;
         }
-        .gallery-image.active {
-            opacity: 1;
-        }
-        .arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 10;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 50%;
-            transition: background-color 0.3s ease;
-        }
-        .arrow:hover {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-        .arrow-left {
-            left: 20px;
-        }
-        .arrow-right {
-            right: 20px;
-        }
-        .gallery-indicators {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            gap: 10px;
-        }
-        .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: #ccc;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+
         .indicator.active {
             background-color: #3498db;
         }
-        .loading-message {
-            text-align: center;
-            color: #666;
-            font-style: italic;
-        }
+
     </style>
 </head>
 <body>
@@ -172,179 +166,46 @@
         </div>
     </div>
 
+    <!--// Featured Content Section -->
+    <div class="featured-content">
+        <h3>Featured</h3>
+        <div class="featured-items">
+            <div class="featured-poster">
+                <a href="FeaturedContent/Revanth Mamidala-ACE25-Poster.pdf" target="_blank">
+                    <img src="FeaturedContent/ACE25_Poster.png" alt="ACE25 Conference Poster" class="featured-thumb">
+                    <div class="featured-caption">ACE25 Conference Poster (Click to view PDF)</div>
+                </a>
+            </div>
+
+            <div class="featured-linkedin">
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7340432242206261248"
+                    height="600" width="504" frameborder="0" allowfullscreen="" title="LinkedIn Post"></iframe>
+                <div class="featured-caption">See my LinkedIn Post</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--// Latest Content Section-->
     <div class="latest-content">
         <h3>Latest Content</h3>
-        <ul>
-            <li><a href="https://medium.com/@mrevanth/the-changing-american-landscape-annual-statistics-of-national-land-cover-data-of-mainland-usa-20d0e1e4ee73" target="_blank">The Changing American Landscape: Annual Statistics of National Land Cover Data of Mainland USA</a></li>
+        <ul class="latest-list">
+            <li class="latest-item">
+                <a href="https://www.linkedin.com/posts/revanth-mamidala-4a13a7158_ace25-activity-7340432242206261248-UCtH?utm_source=share&utm_medium=member_desktop&rcm=ACoAACXJ__kBKQXzrkm7NnRoats3SB8e6NOoeLY" target="_blank">
+                    Represented Iowa Section - AWWA and Presented at ACE25 International Conference, Denver, CO. 
+                </a>
+                <span class="latest-date">2024-05-10</span>
+            </li>
+            <li class="latest-item">
+                <a href="https://medium.com/@mrevanth/the-changing-american-landscape-annual-statistics-of-national-land-cover-data-of-mainland-usa-20d0e1e4ee73" target="_blank">
+                    The Changing American Landscape: Annual Statistics of National Land Cover Data of Mainland USA
+                </a>
+                <span class="latest-date">2024-06-15</span>
+            </li>
+            
+            <!-- Add more items as needed -->
         </ul>
     </div>
 
-    <div class="photo-gallery">
-        <h3>Photo Gallery</h3>
-        <div class="photo-gallery-container">
-            <button class="arrow arrow-left">&#9664;</button>
-            <div class="photo-gallery-slide" id="photoGallery">
-                <div class="loading-message">Loading images...</div>
-            </div>
-            <button class="arrow arrow-right">&#9654;</button>
-        </div>
-        <div class="gallery-indicators" id="indicators"></div>
-    </div>
-
-    <script>
-        const galleryPath = 'https://raw.githubusercontent.com/RevanthMamidala/RevanthMamidala.github.io/main/PhotoGallery/';
-        const maxImages = 10; // Maximum number of images to display (set to 0 for no limit)
-        
-        // Define your image list here - update this when you add new images
-        const availableImages = [
-            Revanth_Mamidala - Copy.png,
-            Revanth_Mamidala.png,
-            '1Z0A6122.jpg',
-            '20230618_131906.jpg', 
-            '1000003650.JPEG',
-            'Revanth Formal Image.jpeg'
-            // Add more image names here as you upload them
-        ];
-        
-        const galleryContainer = document.getElementById('photoGallery');
-        const indicatorsContainer = document.getElementById('indicators');
-        let slideIndex = 0;
-        let images = [];
-        let loadedImages = 0;
-        let imageNames = [];
-
-        function showSlide(n) {
-            if (images.length === 0) return;
-            
-            if (n >= images.length) slideIndex = 0;
-            if (n < 0) slideIndex = images.length - 1;
-
-            // Hide all images
-            images.forEach(img => img.classList.remove('active'));
-            
-            // Show current image
-            if (images[slideIndex]) {
-                images[slideIndex].classList.add('active');
-            }
-
-            // Update indicators
-            const indicators = document.querySelectorAll('.indicator');
-            indicators.forEach((indicator, index) => {
-                indicator.classList.toggle('active', index === slideIndex);
-            });
-        }
-
-        function nextSlide() {
-            slideIndex++;
-            showSlide(slideIndex);
-        }
-
-        function prevSlide() {
-            slideIndex--;
-            showSlide(slideIndex);
-        }
-
-        function goToSlide(n) {
-            slideIndex = n;
-            showSlide(slideIndex);
-        }
-
-        function shuffleArray(array) {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
-        }
-
-        function initializeGallery() {
-            // Shuffle images for variety
-            let selectedImages = shuffleArray(availableImages);
-            
-            // Limit number of images if specified
-            if (maxImages > 0 && selectedImages.length > maxImages) {
-                selectedImages = selectedImages.slice(0, maxImages);
-            }
-            
-            imageNames = selectedImages;
-            console.log(`Loading ${imageNames.length} images:`, imageNames);
-            
-            createImages();
-        }
-
-        function createImages() {
-            galleryContainer.innerHTML = '<div class="loading-message">Loading images...</div>';
-            images = [];
-            loadedImages = 0;
-            
-            // Clear the loading message when we start creating images
-            setTimeout(() => {
-                galleryContainer.innerHTML = '';
-                
-                imageNames.forEach((imageName, index) => {
-                    const img = document.createElement('img');
-                    img.src = `${galleryPath}${imageName}`;
-                    img.alt = `Gallery Image ${index + 1}`;
-                    img.className = 'gallery-image';
-                    
-                    img.onload = () => {
-                        loadedImages++;
-                        console.log(`Loaded image ${loadedImages}/${imageNames.length}: ${imageName}`);
-                        
-                        if (loadedImages === 1) {
-                            // Show first image immediately
-                            img.classList.add('active');
-                        }
-                        if (loadedImages === imageNames.length) {
-                            createIndicators();
-                        }
-                    };
-                    
-                    img.onerror = () => {
-                        console.error(`Error loading image: ${imageName}`);
-                        loadedImages++;
-                        if (loadedImages === imageNames.length) {
-                            createIndicators();
-                        }
-                    };
-                    
-                    galleryContainer.appendChild(img);
-                    images.push(img);
-                });
-            }, 100);
-        }
-
-        function createIndicators() {
-            indicatorsContainer.innerHTML = '';
-            imageNames.forEach((_, index) => {
-                const indicator = document.createElement('div');
-                indicator.className = 'indicator';
-                if (index === 0) indicator.classList.add('active');
-                indicator.addEventListener('click', () => goToSlide(index));
-                indicatorsContainer.appendChild(indicator);
-            });
-        }
-
-        // Event listeners
-        document.querySelector('.arrow-left').addEventListener('click', prevSlide);
-        document.querySelector('.arrow-right').addEventListener('click', nextSlide);
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') prevSlide();
-            if (e.key === 'ArrowRight') nextSlide();
-        });
-
-        // Auto-slide (optional - uncomment to enable)
-        // setInterval(nextSlide, 5000);
-
-        // Initialize gallery
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeGallery);
-        } else {
-            initializeGallery();
-        }
-    </script>
 </body>
 </html>
