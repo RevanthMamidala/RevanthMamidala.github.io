@@ -24,3 +24,11 @@ All the projects
     - Posters
 
 ## Others
+
+
+### Edits I need
+1. Add all project Htmls
+2. Work on the popup
+3. The URL is not changing for each page, so copying particular page or project is not possible. So need to work on it.
+4. Ask for ideas on better formatting of the files, folders and content with a vlog section.
+5. Add certifications, affiliations, work experience links etc.,
