@@ -73,6 +73,7 @@
             const response = await fetch(page);
             const content = await response.text();
             document.getElementById('content').innerHTML = content;
+            initializeModals(); // Reinitialize modals after content load
         }
         document.addEventListener('DOMContentLoaded', () => {
             loadContent('about_me_section.html'); // Load default content (Home/About Me)
@@ -85,6 +86,28 @@
                 });
             });
         });
+
+        function initializeModals() {
+            window.onclick = function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.style.display = "none";
+                    document.body.style.overflow = "auto";
+                }
+            };
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    const modals = document.querySelectorAll('.modal');
+                    modals.forEach(modal => {
+                        if (modal.style.display === 'block') {
+                            modal.style.display = 'none';
+                            document.body.style.overflow = 'auto';
+                        }
+                    });
+                }
+            });
+        }
+
     </script>
 </head>
 <body>
