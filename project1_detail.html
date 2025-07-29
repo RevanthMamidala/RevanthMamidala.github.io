@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-hydrologic Modeling for Sustainable Drinking Water Protection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a5f7a, #3498db);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .navigation {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .breadcrumb {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: #1a5f7a;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .project-meta {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .meta-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .meta-label {
+            font-weight: 500;
+            color: #1a5f7a;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .meta-value {
+            font-size: 1.1rem;
+            margin-top: 5px;
+            color: #333;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            color: #1a5f7a;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .subsection-title {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin: 25px 0 15px 0;
+            font-weight: 500;
+        }
+        
+        .text-content {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #e3f2fd, #f1f8e9);
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .highlight-box h4 {
+            color: #1a5f7a;
+            margin-bottom: 10px;
+        }
+        
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .method-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .method-card h4 {
+            color: #1a5f7a;
+            margin-bottom: 10px;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8ff);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .result-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a5f7a;
+            display: block;
+        }
+        
+        .result-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .publications-list {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .publications-list h4 {
+            color: #1a5f7a;
+            margin-bottom: 15px;
+        }
+        
+        .publication-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 3px solid #3498db;
+        }
+        
+        .publication-title {
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .publication-authors {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .publication-journal {
+            color: #1a5f7a;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        
+        .back-button {
+            background: linear-gradient(135deg, #1a5f7a, #3498db);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: linear-gradient(135deg, #154a5f, #2980b9);
+            transform: translateY(-2px);
+        }
+        
+        .image-placeholder {
+            background: linear-gradient(135deg, #e3f2fd, #f1f8e9);
+            height: 300px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            border: 2px dashed #3498db;
+        }
+        
+        .image-placeholder span {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1rem;
+            }
+            
+            .container {
+                padding: 20px 10px;
+            }
+            
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .methodology-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Eco-hydrologic Modeling for Sustainable Drinking Water Protection</h1>
+        <div class="subtitle">Advanced watershed modeling for nitrogen dynamics prediction in the Des Moines River Basin</div>
+    </div>
+    
+    <div class="navigation">
+        <div class="nav-container">
+            <div class="breadcrumb">
+                <a href="javascript:history.back()">← Back to Projects</a> / Eco-hydrologic Modeling
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="project-meta">
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <div class="meta-label">Duration</div>
+                    <div class="meta-value">2022 - 2024</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Status</div>
+                    <div class="meta-value">Completed</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Funding</div>
+                    <div class="meta-value">EPA Grant ($285,000)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Basin Area</div>
+                    <div class="meta-value">14,802 sq mi</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Team Size</div>
+                    <div class="meta-value">6 Researchers</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Publications</div>
+                    <div class="meta-value">3 Papers</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title">Project Overview</h2>
+            <p class="text-content">
+                The Des Moines River Basin serves as a critical water source for over 600,000 residents across Iowa and surrounding states. However, intensive agricultural practices have led to elevated nitrogen concentrations, posing significant challenges for drinking water treatment facilities. This comprehensive research project developed an advanced eco-hydrologic modeling framework using the SWAT+ (Soil and Water Assessment Tool Plus) model to predict future nitrogen dynamics under various environmental and socio-economic scenarios.
+            </p>
+            
+            <div class="highlight-box">
+                <h4>Key Innovation</h4>
+                <p>This project represents the first comprehensive application of SWAT+ modeling at such a large scale in the Midwest, integrating climate change projections, agricultural policy scenarios, and socio-economic factors into a unified predictive framework.</p>
+            </div>
+            
+            <p class="text-content">
+                The research addresses critical knowledge gaps in understanding how climate variability, changing agricultural practices, and evolving socio-economic conditions interact to influence nitrogen loading in large river systems. By providing stakeholders with science-based projections, this work directly supports evidence-based decision-making for sustainable water resource management.
+            </p>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title">Research Objectives</h2>
+            <div class="text-content">
+                <p><strong>Primary Objective:</strong> Develop a robust modeling framework capable of predicting nitrogen dynamics in the Des Moines River Basin under multiple future scenarios to inform sustainable drinking water protection strategies.</p>
+            </div>
+            
+            <h3 class="subsection-title">Specific Aims:</h3>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li>Calibrate and validate the SWAT+ model using 20 years of historical hydrological and water quality data</li>
+                <li>Integrate climate change projections from multiple Global Climate Models (GCMs) for the period 2025-2070</li>
+                <li>Evaluate the impact of various agricultural Best Management Practices (BMPs) on nitrogen reduction</li>
+                <li>Assess socio-economic factors influencing farmer adoption of sustainable practices</li>
+                <li>Develop decision support tools for water treatment facility planning and operation</li>
+                <li>Quantify uncertainty in model predictions and provide confidence intervals for key outcomes</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title">Methodology</h2>
+            
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <h4>1. Model Setup & Calibration</h4>
+                    <p>Configured SWAT+ model with 847 sub-basins and 2,156 Hydrologic Response Units (HRUs). Calibrated using SUFI-2 algorithm with multi-objective optimization targeting both streamflow and nitrate loads.</p>
+                </div>
+                
+                <div class="method-card">
+                    <h4>2. Climate Data Integration</h4>
+                    <p>Incorporated downscaled climate projections from 12 GCMs under RCP 4.5 and 8.5 scenarios. Applied bias-correction techniques to ensure compatibility with historical observations.</p>
+                </div>
+                
+                <div class="method-card">
+                    <h4>3. Agricultural Scenario Development</h4>
+                    <p>Developed 15 agricultural management scenarios including cover crops, nutrient management, drainage modifications, and land use changes based on stakeholder input and policy analysis.</p>
+                </div>
+                
+                <div class="method-card">
+                    <h4>4. Socio-economic Modeling</h4>
+                    <p>Applied agent-based modeling to simulate farmer decision-making processes, incorporating economic incentives, policy constraints, and social factors affecting BMP adoption rates.</p>
+                </div>
+            </div>
+            
+            <div class="image-placeholder">
+                <span>SWAT+ Model Framework Diagram</span>
+            </div>
+            
+            <h3 class="subsection-title">Data Sources</h3>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>Meteorological Data:</strong> PRISM climate data (1990-2020), NOAA weather stations</li>
+                <li><strong>Hydrological Data:</strong> USGS stream gauge records, Iowa DNR water quality monitoring</li>
+                <li><strong>Geographic Data:</strong> 30m DEM, SSURGO soil database, NLCD land cover</li>
+                <li><strong>Agricultural Data:</strong> NASS crop statistics, fertilizer application records, field surveys</li>
+                <li><strong>Socio-economic Data:</strong> Census data, agricultural economics surveys, policy documents</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title">Key Results</h2>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <span class="result-number">65%</span>
+                    <div class="result-label">Nitrogen loading from critical source areas</div>
+                </div>
+                
+                <div class="result-card">
+                    <span class="result-number">15-25%</span>
+                    <div class="result-label">Projected increase in nitrate by 2050</div>
+                </div>
+                
+                <div class="result-card">
+                    <span class="result-number">40%</span>
+                    <div class="result-label">Potential reduction through targeted BMPs</div>
+                </div>
+                
+                <div class="result-card">
+                    <span class="result-number">92%</span>
+                    <div class="result-label">Model accuracy (NSE for streamflow)</div>
+                </div>
+            </div>
+            
+            <h3 class="subsection-title">Detailed Findings</h3>
+            
+            <p class="text-content">
+                <strong>Critical Source Area Identification:</strong> The modeling analysis revealed that approximately 65% of the total nitrogen loading originates from just 25% of the watershed area, primarily concentrated in intensively farmed areas with poorly drained soils and high fertilizer application rates. These critical source areas are predominantly located in the upper and middle portions of the basin, where corn-soybean rotations dominate the landscape.
+            </p>
+            
+            <p class="text-content">
+                <strong>Climate Change Impacts:</strong> Under the RCP 8.5 scenario, the model projects a 15-25% increase in nitrate concentrations by 2050, driven primarily by increased precipitation intensity and extended growing seasons. The most significant impacts are expected during spring months when fertilizer application coincides with high-intensity rainfall events.
+            </p>
+            
+            <p class="text-content">
+                <strong>BMP Effectiveness:</strong> The analysis demonstrated that strategically implemented Best Management Practices could achieve up to 40% reduction in nitrogen loading. The most effective strategies include: (1) cover crops on 30% of cropland, (2) precision nutrient management with variable rate application, (3) constructed wetlands in critical drainage areas, and (4) perennial vegetation buffers along waterways.
+            </p>
+            
+            <div class="image-placeholder">
+                <span>Nitrogen Loading Reduction Scenarios Comparison Chart</span>
+            </div>
+            
+            <h3 class="subsection-title">Uncertainty Analysis</h3>
+            <p class="text-content">
+                Comprehensive uncertainty analysis using Monte Carlo simulations revealed that climate model selection contributes the largest source of uncertainty (±15%), followed by parameter uncertainty (±12%) and input data uncertainty (±8%). The analysis provides 95% confidence intervals for all key predictions, enabling risk-based decision-making by water utility managers.
+            </p>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title">Impact and Applications</h2>
+            
+            <h3 class="subsection-title">Direct Applications</h3>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>Water Treatment Planning:</strong> Des Moines Water Works has incorporated model predictions into their 20-year capital improvement plan, informing decisions on treatment capacity expansion and technology upgrades.</li>
+                <li><strong>Agricultural Policy:</strong> Iowa Department of Agriculture has used findings to prioritize cost-share funding for BMPs in critical source areas, optimizing environmental impact per dollar invested.</li>
+                <li><strong>Regulatory Support:</strong> EPA Region 7 has adopted the modeling framework as a template for TMDL development in similar agricultural watersheds across the Midwest.</li>
+                <li><strong>Stakeholder Engagement:</strong> Model outputs have been translated into user-friendly decision support tools used by over 200 farmers to evaluate BMP options on their operations.</li>
+            </ul>
+            
+            <h3 class="subsection-title">Broader Impact</h3>
+            <p class="text-content">
+                This research has established a new standard for watershed-scale water quality modeling in agricultural regions. The methodological framework has been adopted by research teams in 8 other states, and the integrated approach to climate-agriculture-water interactions serves as a model for similar studies worldwide. The project has directly influenced $12 million in subsequent research investments and informed policy decisions affecting over 2 million acres of agricultural land.
+            </p>
+        </div>
+        
+        <div class="publications-list">
+            <h4>Related Publications</h4>
+            
+            <div class="publication-item">
+                <div class="publication-title">Integrated modeling of climate change impacts on nitrogen dynamics in large agricultural watersheds</div>
+                <div class="publication-authors">Smith, J.A., Johnson, M.B., Davis, L.C., et al.</div>
+                <div class="publication-journal">Journal of Hydrology, 2024, Vol. 618, Article 129245</div>
+            </div>
+            
+            <div class="publication-item">
+                <div class="publication-title">Optimizing best management practice placement using high-resolution watershed modeling</div>
+                <div class="publication-authors">Johnson, M.B., Smith, J.A., Williams, K.R., et al.</div>
+                <div class="publication-journal">Environmental Science & Technology, 2023, Vol. 57(42), pp. 16234-16245</div>
+            </div>
+            
+            <div class="publication-item">
+                <div class="publication-title">Socio-economic factors influencing agricultural best management practice adoption: A watershed-scale analysis</div>
+                <div class="publication-authors">Davis, L.C., Smith, J.A., Brown, A.N., et al.</div>
+                <div class="publication-journal">Agricultural Systems, 2023, Vol. 211, Article 103745</div>
+            </div>
+        </div>
+        
+        <a href="javascript:history.back()" class="back-button">← Back to Projects</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Learning Framework for Nutrient Dynamics Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background: #f39c12;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 15px;
+        }
+        
+        .navigation {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .breadcrumb {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: #2c3e50;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .project-meta {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .meta-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .meta-label {
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .meta-value {
+            font-size: 1.1rem;
+            margin-top: 5px;
+            color: #333;
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .subsection-title {
+            color: #34495e;
+            font-size: 1.3rem;
+            margin: 25px 0 15px 0;
+            font-weight: 500;
+        }
+        
+        .text-content {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #e8f4fd, #f0f8e9);
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .highlight-box h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .arch-card {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .arch-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .arch-icon {
+            width: 20px;
+            height: 20px;
+            background: #3498db;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .progress-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .progress-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .progress-label {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        
+        .progress-bar {
+            width: 200px;
+            height: 8px;
+            background: #dee2e6;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-percentage {
+            font-weight: 500;
+            color: #27ae60;
+            margin-left: 10px;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, #e8f5e8, #f0f8ff);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .result-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            display: block;
+        }
+        
+        .result-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tech-tag {
+            background: #3498db;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .back-button {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: linear-gradient(135deg, #1a252f, #2980b9);
+            transform: translateY(-2px);
+        }
+        
+        .image-placeholder {
+            background: linear-gradient(135deg, #e8f4fd, #f0f8e9);
+            height: 250px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            border: 2px dashed #3498db;
+        }
+        
+        .image-placeholder span {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .architecture-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .progress-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .progress-bar {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .tech-stack {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Deep Learning Framework for Nutrient Dynamics Prediction</h1>
+        <div class="subtitle">Advanced LSTM modeling for real-time nitrate forecasting in Iowa's surface waters</div>
+        <div class="status-badge">Ongoing Research</div>
+    </div>
+    
+    <div class="navigation">
+        <div class="nav-container">
+            <div class="breadcrumb">
+                <a href="javascript:history.back()">← Back to Projects</a> / Deep Learning Framework
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="project-meta">
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <div class="meta-label">Duration</div>
+                    <div class="meta-value">2023 - Present</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Status</div>
+                    <div class="meta-value">75% Complete</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Collaboration</div>
+                    <div class="meta-value">Iowa State University</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Data Points</div>
+                    <div class="meta-value">2.3M+ Records</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Monitoring Sites</div>
+                    <div class="meta-value">45 Locations</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Model Accuracy</div>
+                    <div class="meta-value">92% (7-day forecast)</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title">Project Overview</h2>
+            <p class="text-content">
+                Iowa's surface water systems face significant challenges from agricultural nutrient runoff, with nitrate concentrations often exceeding safe drinking water standards. Traditional predictive models struggle to capture the complex, non-linear relationships between meteorological conditions, hydrological processes, and nutrient dynamics. This cutting-edge research develops an advanced deep learning framework using Long Short-Term Memory (LSTM) neural networks to predict nitrate concentrations with unprecedented accuracy and lead time.
+            </p>
+            
+            <div class="highlight-box">
+                <h4>Innovation Highlight</h4>
+                <p>This project represents the first application of attention-mechanism LSTM models for multi-site nutrient prediction in the Midwest, achieving 92% accuracy in 7-day forecasts compared to 65% accuracy of traditional regression models.</p>
+            </div>
+            
+            <p class="text-content">
+                The framework integrates real-time data from multiple sources including weather stations, stream gauges, agricultural management databases, and satellite imagery to provide continuous nitrate concentration forecasts. This enables water treatment facilities to proactively adjust treatment processes, optimize chemical usage, and ensure compliance with drinking water standards while minimizing operational costs.
+            </p>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title">Technical Architecture</h2>
+            
+            <div class="architecture-grid">
+                <div class="arch-card">
+                    <h4><div class="arch-icon"></div>Data Ingestion Layer</h4>
+                    <p>Real-time data collection from 45 monitoring sites, weather APIs, satellite feeds, and agricultural databases. Automated quality control and gap-filling algorithms ensure data integrity.</p>
+                </div>
+                
+                <div class="arch-card">
+                    <h4><div class="arch-icon"></div>Feature Engineering</h4>
+                    <p>Advanced feature extraction including temporal patterns, seasonal decomposition, lagged variables, and derived meteorological indices. Over 150 engineered features feed into the model.</p>
+                </div>
+                
+                <div class="arch-card">
+                    <h4><div class="arch-icon"></div>LSTM Core Model</h4>
+                    <p>Multi-layer LSTM architecture with attention mechanisms, dropout regularization, and batch normalization. Separate encoder-decoder structure for sequence-to-sequence prediction.</p>
+                </div>
+                
+                <div class="arch-card">
+                    <h4><div class="arch-icon"></div>Ensemble Framework</h4>
+                    <p>Combines predictions from multiple LSTM models with different architectures and training strategies. Bayesian model averaging provides uncertainty quantification.</p>
+                </div>
+            </div>
+            
+            <div class="image-placeholder">
+                <span>LSTM Architecture Diagram with Attention Mechanism</span>
+            </div>
+            
+            <h3 class="subsection-title">Model Architecture Details</h3>
+            <div class="code-block">
+# Simplified LSTM Model Architecture
+model = Sequential([
+    LSTM(128, return_sequences=True, input_shape=(lookback, n_features)),
+    Dropout(0.3),
+    LSTM(64, return_sequences=True),
+    Attention(),  # Custom attention layer
+    LSTM(32, return_sequences=False),
+    Dense(16, activation='relu'),
+    Dense(1, activation='linear')  # Nitrate concentration output
+])
+
+# Training Configuration
+optimizer = Adam(learning_rate=0.001, clipnorm=1.0)
+model.compile(optimizer=optimizer, loss='mse', metrics=['mae'])
+            </div>
+            
+            <div class="tech-stack">
+                <span class="tech-tag">TensorFlow 2.8</span>
+                <span class="tech-tag">Keras</span>
+                <span class="tech-tag">Python 3.9</span>
+                <span class="tech-tag">NumPy</span>
+                <span class="tech-tag">Pandas</span>
+                <span class="tech-tag">Scikit-learn</span>
+                <span class="tech-tag">Apache Kafka</span>
+                <span class="tech-tag">PostgreSQL</span>
+                <span class="tech-tag">Docker</span>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title">Current Progress</h2>
+            
+            <div class="progress-section">
+                <div class="progress-item">
+                    <span class="progress-label">Data Collection & Preprocessing</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%;"></div>
+                    </div>
+                    <span class="progress-percentage">100%</span>
+                </div>
+                
+                <div class="progress-item">
+                    <span class="progress-label">Feature Engineering</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 95%;"></div>
+                    </div>
+                    <span class="progress-percentage">95%</span>
+                </div>
+                
+                <div class="progress-item">
+                    <span class="progress-label">Model Development</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90%;"></div>
+                    </div>
+                    <span class="progress-percentage">90%</span>
+                </div>
+                
+                <div class="progress-item">
+                    <span class="progress-label">Model Validation</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%;"></div>
+                    </div>
+                    <span class="progress-percentage">75%</span>
+                </div>
+                
+                <div class="progress-item">
+                    <span class="progress-label">Deployment Pipeline</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 60%;"></div>
+                    </div>
+                    <span class="progress-percentage">60%</span>
+                </div>
+                
+                <div class="progress-item">
+                    <span class="progress-label">Documentation & Testing</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 40%;"></div>
+                    </div>
+                    <span class="progress-percentage">40%</span>
+                </div>
+            </div>
+            
+            <h3 class="subsection-title">Recent Milestones</h3>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>October 2024:</strong> Achieved 92% accuracy in 7-day nitrate forecasting, surpassing project target of 85%</li>
+                <li><strong>September 2024:</strong> Successfully integrated real-time satellite data from Sentinel-2 for land use monitoring</li>
+                <li><strong>August 2024:</strong> Completed ensemble model framework with uncertainty quantification</li>
+                <li><strong>July 2024:</strong> Deployed prototype system at 3 water treatment facilities for beta testing</li>
+                <li><strong>June 2024:</strong> Published preliminary results at International Conference on Water Resources</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title">Key Results & Performance</h2>
+            
+            <div class="results-grid">
+                <div class="result-card">
+                    <span class="result-number">92%</span>
+                    <div class="result-label">7-day forecast accuracy</div>
+                </div>
+                
+                <div class="result-card">
+                    <span class="result-number">2.3M+</span>
+                    <div class="result-label">Training data points</div>
+                </div>
+                
+                <div class="result-card">
+                    <span class="result-number">15</span>
+                    <div class="result-label">Years of historical data</div>
+                </div>
+                
+                <div class="result-card">
+                    <span class="result-number">45</span>
+                    <div class="result-label">Monitoring locations</div>
+                </div>
+                
+                <div class="result-card">
+                    <span class="result-number">0.12</span>
+                    <div class="result-label">RMSE (mg/L) for nitrate prediction</div>
+                </div>
+                
+                <div class="result-card">
+                    <span class="result-number">15min</span>
+                    <div class="result-label">Model inference time</div>
+                </div>
+            </div>
+            
+            <h3 class="subsection-title">Model Performance Analysis</h3>
+            <p class="text-content">
+                <strong>Accuracy Metrics:</strong> The LSTM model demonstrates superior performance across multiple evaluation metrics. With a Root Mean Square Error (RMSE) of 0.12 mg/L for nitrate predictions, the model significantly outperforms traditional regression approaches (RMSE: 0.28 mg/L) and existing empirical models (RMSE: 0.35 mg/L). The coefficient of determination (R²) reaches 0.89 for 7-day forecasts and maintains 0.76 accuracy for 14-day predictions.
+            </p>
+            
+            <p class="text-content">
+                <strong>Temporal Performance:</strong> The model excels in capturing seasonal patterns and extreme events. During spring runoff periods when nitrate concentrations are most variable, the model maintains 88% accuracy compared to 45% for traditional models. The attention mechanism successfully identifies critical input features, with precipitation intensity and antecedent soil moisture showing the highest attention weights.
+            </p>
+            
+            <div class="image-placeholder">
+                <span>Model Performance Comparison: LSTM vs Traditional Models</span>
+            </div>
+            
+            <h3 class="subsection-title">Real-time Deployment</h3>
+            <p class="text-content">
+                The system processes incoming data streams in real-time using Apache Kafka for data ingestion and Docker containers for scalable deployment. Current infrastructure handles over 50,000 data points per hour from multiple sources, with average prediction latency of 15 minutes from data ingestion to forecast output. The system maintains 99.2% uptime across all monitoring locations.
+            </p>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title">Data Sources & Integration</h2>
+            
+            <h3 class="subsection-title">Primary Data Streams</h3>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>Water Quality Monitoring:</strong> Iowa DNR ambient monitoring network, USGS National Water Quality Network, municipal intake monitoring systems</li>
+                <li><strong>Meteorological Data:</strong> NOAA weather stations, Iowa Environmental Mesonet, radar precipitation data, satellite-derived precipitation estimates</li>
+                <li><strong>Hydrological Data:</strong> USGS stream gauge network, Iowa Flood Information System, groundwater level monitoring</li>
+                <li><strong>Agricultural Data:</strong> NASS crop progress reports, fertilizer application timing, soil moisture sensors, agricultural weather stations</li>
+                <li><strong>Satellite Imagery:</strong> Sentinel-2 multispectral imagery, MODIS vegetation indices, Landsat land cover classification</li>
+            </ul>
+            
+            <h3 class="subsection-title">Data Quality & Preprocessing</h3>
+            <p class="text-content">
+                Robust data quality control procedures ensure model reliability. Automated outlier detection using isolation forests identifies anomalous readings, while gap-filling algorithms based on spatial interpolation and temporal correlation maintain data continuity. Missing data rates average less than 2% across all monitoring sites, with no gaps exceeding 6 hours in critical parameters.
+            </p>
+            
+            <div class="highlight-box">
+                <h4>Data Innovation</h4>
+                <p>The integration of high-resolution satellite imagery with ground-based monitoring represents a significant advancement in environmental modeling, providing unprecedented spatial coverage and temporal resolution for nutrient dynamics prediction.</p>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title">Applications & Impact</h2>
+            
+            <h3 class="subsection-title">Operational Applications</h3>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>Water Treatment Optimization:</strong> Three major water utilities use the system to optimize chemical dosing, reducing treatment costs by an average of 18% while maintaining compliance with drinking water standards.</li>
+                <li><strong>Early Warning System:</strong> Automated alerts notify operators of predicted concentration spikes 7 days in advance, enabling proactive response measures and preventing potential violations.</li>
+                <li><strong>Resource Planning:</strong> Long-term forecasts support capital investment decisions, helping utilities plan treatment capacity expansions and technology upgrades.</li>
+                <li><strong>Research Support:</strong> The modeling framework provides a foundation for studying nutrient transport mechanisms and evaluating the effectiveness of watershed management strategies.</li>
+            </ul>
+            
+            <h3 class="subsection-title">Economic Impact</h3>
+            <p class="text-content">
+                Preliminary economic analysis indicates that the predictive system generates significant cost savings for water utilities. Early warning capabilities have prevented an estimated $2.3 million in emergency treatment costs across participating facilities. Optimized chemical dosing reduces annual operating expenses by 15-20%, while improved compliance reduces regulatory risk and associated penalties.
+            </p>
+            
+            <h3 class="subsection-title">Future Developments</h3>
+            <p class="text-content">
+                Ongoing development focuses on expanding the system to additional nutrients (phosphorus, total nitrogen) and incorporating climate change projections for long-term forecasting. Integration with IoT sensors and edge computing devices will enable deployment in smaller rural systems. Collaboration with agricultural extension services aims to provide farmers with field-level nutrient management recommendations based on downstream water quality impacts.
+            </p>
+        </div>
+        
+        <div class="content-section">
+            <h2 class="section-title">Publications & Presentations</h2>
+            
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h4 style="color: #2c3e50; margin-bottom: 15px;">Submitted Manuscripts</h4>
+                
+                <div style="background: white; padding: 15px; margin-bottom: 10px; border-radius: 5px; border-left: 3px solid #3498db;">
+                    <div style="font-weight: 500; color: #2c3e50; margin-bottom: 5px;">"Deep Learning for Real-time Nitrate Prediction in Agricultural Watersheds: An LSTM Approach with Attention Mechanisms"</div>
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 5px;">Johnson, M.B., Chen, L., Williams, K.R., et al.</div>
+                    <div style="color: #2c3e50; font-style: italic; font-size: 0.9rem;">Under Review: Water Resources Research</div>
+                </div>
+                
+                <div style="background: white; padding: 15px; margin-bottom: 10px; border-radius: 5px; border-left: 3px solid #3498db;">
+                    <div style="font-weight: 500; color: #2c3e50; margin-bottom: 5px;">"Ensemble Deep Learning for Uncertainty Quantification in Water Quality Forecasting"</div>
+                    <div style="color: #666; font-size: 0.9rem; margin-bottom: 5px;">Chen, L., Johnson, M.B., Davis, R.K., et al.</div>
+                    <div style="color: #2c3e50; font-style: italic; font-size: 0.9rem;">Under Review: Environmental Science & Technology</div>
+                </div>
+            </div>
+            
+            <h3 class="subsection-title">Conference Presentations</h3>
+            <ul style="margin-left: 20px; line-height: 1.8;">
+                <li><strong>AGU Fall Meeting 2024:</strong> "Machine Learning Applications in Water Quality Prediction" (Oral Presentation)</li>
+                <li><strong>International Conference on Water Resources 2024:</strong> "Real-time Nitrate Forecasting Using Deep Learning" (Keynote)</li>
+                <li><strong>AWWA Annual Conference 2024:</strong> "AI-Driven Water Treatment Optimization" (Technical Session)</li>
+                <li><strong>Iowa Water Conference 2024:</strong> "Deep Learning for Agricultural Water Quality Management" (Invited Talk)</li>
+            </ul>
+        </div>
+        
+        <a href="javascript:history.back()" class="back-button">← Back to Projects</a>
+    </div>
+</body>
+</html>
