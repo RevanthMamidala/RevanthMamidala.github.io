@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revanth Mamidala - Website</title>
+    <title>Revanth Mamidala - Water Resources Engineer</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -35,14 +35,124 @@
             text-decoration: none;
             margin: 0 15px;
             font-size: 1.2rem;
-            cursor: pointer;
+            transition: color 0.3s ease;
         }
         nav a:hover {
-            text-decoration: underline;
+            color: #3498db;
         }
-        #content {
-            padding: 40px;
+        nav a.active {
+            color: #3498db;
+            font-weight: bold;
         }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 40px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .profile-image {
+            flex: 0 0 30%;
+            text-align: center;
+        }
+        .profile-image img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .profile-image h3 {
+            margin-top: 10px;
+            color: #1a5f7a;
+            font-weight: bold;
+        }
+        .content {
+            flex: 1;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        .content h3 {
+            margin-top: 20px;
+            color: #1a5f7a;
+        }
+        
+        .featured-content {
+            width: 80%;
+            margin: 40px auto 0 auto;
+            padding: 20px 0;
+            background: #eaf6fb;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.07);
+        }
+        .featured-content h3 {
+            text-align: center;
+            color: #1a5f7a;
+            margin-bottom: 20px;
+        }
+        .featured-items {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .featured-thumb {
+            width: 100%;
+            max-width: 340px;
+            height: auto;
+            aspect-ratio: 3/4;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(52,152,219,0.13);
+            margin-bottom: 8px;
+        }
+        .featured-poster {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 340px;
+        }
+        .featured-caption {
+            text-align: center;
+            color: #1a5f7a;
+            font-weight: 500;
+        }            
+        
+        .latest-content {
+            width: 80%;
+            margin: auto;
+            padding: 40px 0;
+        }
+        .latest-content h3 {
+            color: #1a5f7a;
+        }
+        .latest-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .latest-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .latest-item a {
+            flex: 1;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .latest-date {
+            color: #888;
+            font-size: 0.95em;
+            margin-left: 20px;
+            white-space: nowrap;
+        }
+
         footer {
             background-color: #f9f9f0;
             padding: 20px;
@@ -67,48 +177,24 @@
         footer a:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .featured-items {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav {
+                flex-wrap: wrap;
+            }
+            nav a {
+                margin: 5px 10px;
+            }
+        }
     </style>
-    <script>
-        async function loadContent(page) {
-            const response = await fetch(page);
-            const content = await response.text();
-            document.getElementById('content').innerHTML = content;
-            initializeModals(); // Reinitialize modals after content load
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-            loadContent('about_me_section.html'); // Load default content (Home/About Me)
-            const links = document.querySelectorAll('nav a');
-            links.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const page = link.getAttribute('href');
-                    loadContent(page);
-                });
-            });
-        });
-
-        function initializeModals() {
-            window.onclick = function(event) {
-                if (event.target.classList.contains('modal')) {
-                    event.target.style.display = "none";
-                    document.body.style.overflow = "auto";
-                }
-            };
-
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') {
-                    const modals = document.querySelectorAll('.modal');
-                    modals.forEach(modal => {
-                        if (modal.style.display === 'block') {
-                            modal.style.display = 'none';
-                            document.body.style.overflow = 'auto';
-                        }
-                    });
-                }
-            });
-        }
-
-    </script>
 </head>
 <body>
     <header>
@@ -117,15 +203,67 @@
         <p>| Climate Change | Water-Energy Nexus | Watershed Conservation |</p>
     </header>
     <nav>
-        <a href="about_me_section.html">Home</a>
-        <a href="education_experience.html">Education & Work Experience</a>
-        <a href="projects_section.html">Projects</a>
-        <a href="publications_section.html">Publications</a>
-        <a href="others_section.html">Others</a>
+        <a href="index.html" class="active">Home</a>
+        <a href="education.html">Education & Work Experience</a>
+        <a href="projects.html">Projects</a>
+        <a href="publications.html">Publications</a>
+        <a href="others.html">Others</a>
     </nav>
-    <div id="content">
-        <!-- Content for each section will be dynamically loaded here -->
+
+    <div class="container">
+        <div class="profile-image">
+            <img src="https://raw.githubusercontent.com/RevanthMamidala/RevanthMamidala.github.io/main/Revanth_Mamidala.png" alt="Revanth Mamidala">
+            <h3>Revanth Mamidala</h3>
+        </div>
+        <div class="content">
+            <p>Hi there! I am a researcher dedicated to exploring the Water-Energy-Climate nexus and advancing eco-hydrological modeling to protect drinking water resources and promote sustainable agriculture. My current work focuses on drinking water treatment, fate and transport of nutrients, and developing Best Management Practices for drinking water protection in the face of climate change.</p>
+            <p>Previously, I conducted research on hydrodynamic modeling and glacial lake outburst flood (GLOF) modeling and risk analysis, addressing critical challenges in water-related hazard assessment. Earlier in my career, my research centered on the circular economy, resource recovery, and wastewater treatment.</p>
+            <h3>Research Interests:</h3>
+            <ul>
+                <li>Broadly, I am interested in the dynamics of the Water-Food-Energy nexus in future climatic and socio-economic conditions.</li>
+                <li>Eco-hydrologic modeling</li>
+                <li>Nutrient transport modeling</li>
+                <li>Hydrodynamic modeling</li>
+            </ul>
+        </div>
     </div>
+
+    <div class="featured-content">
+        <h3>Featured</h3>
+        <div class="featured-items">
+            <div class="featured-poster">
+                <a href="FeaturedContent/Revanth Mamidala-ACE25-Poster.pdf" target="_blank">
+                    <img src="FeaturedContent/ACE25_Poster.png" alt="ACE25 Conference Poster" class="featured-thumb">
+                    <div class="featured-caption">ACE25 Conference Poster (Click to view PDF)</div>
+                </a>
+            </div>
+
+            <div class="featured-linkedin">
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7340432242206261248"
+                    height="600" width="504" frameborder="0" allowfullscreen="" title="LinkedIn Post"></iframe>
+                <div class="featured-caption">See my LinkedIn Post</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="latest-content">
+        <h3>Latest Content</h3>
+        <ul class="latest-list">
+            <li class="latest-item">
+                <a href="https://www.linkedin.com/posts/revanth-mamidala-4a13a7158_ace25-activity-7340432242206261248-UCtH?utm_source=share&utm_medium=member_desktop&rcm=ACoAACXJ__kBKQXzrkm7NnRoats3SB8e6NOoeLY" target="_blank">
+                    Represented Iowa Section - AWWA and Presented at ACE25 International Conference, Denver, CO. 
+                </a>
+                <span class="latest-date">2024-05-10</span>
+            </li>
+            <li class="latest-item">
+                <a href="https://medium.com/@mrevanth/the-changing-american-landscape-annual-statistics-of-national-land-cover-data-of-mainland-usa-20d0e1e4ee73" target="_blank">
+                    The Changing American Landscape: Annual Statistics of National Land Cover Data of Mainland USA
+                </a>
+                <span class="latest-date">2024-06-15</span>
+            </li>
+        </ul>
+    </div>
+
     <footer>
         <div class="contact-info">
             <div>
