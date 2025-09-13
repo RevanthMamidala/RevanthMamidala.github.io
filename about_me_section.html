@@ -1,190 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        /* header {
-            background: linear-gradient(135deg, #1a5f7a, #3498db);
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        } */
-        header {
-        /*background: linear-gradient(
-            rgba(26, 95, 122, 0.8), 
-            rgba(52, 152, 219, 0.8)
-        ),*/
-        background:url('backgroundimgs/WisconsinLake.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        color: #fff;
-        padding: 20px 0;
-        text-align: center;
-        }
-        header h1 {
-            margin: 0;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-            padding: 40px 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
-        }
-        .profile-image {
-            flex: 0 0 30%;
-            text-align: center;
-        }
-        .profile-image img {
-            width: 100%;
-            max-width: 200px;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-        .profile-image h3 {
-            margin-top: 10px;
-            color: #1a5f7a;
-            font-weight: bold;
-        }
-        .content {
-            flex: 1;
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-        .content h3 {
-            margin-top: 20px;
-            color: #1a5f7a;
-        }
-        
-        .featured-content {
-            width: 80%;
-            margin: 10px auto 0 auto;
-            padding: 20px 0;
-            background: #eaf6fb;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(52,152,219,0.07);
-        }
-        .featured-items {
-            display: flex;
-            gap: 40px; /* Increased gap for better separation */
-            justify-content: center;
-            align-items: flex-start; /* Align to the top for better balance */
-        }
-        .featured-thumb {
-            width: 100%;
-            max-width: 340px; /* Poster will not exceed this width */
-            height: auto;
-            aspect-ratio: 3/4; /* Keeps poster aspect ratio, adjust as needed */
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(52,152,219,0.13);
-            margin-bottom: 8px;
-        }
-        .featured-poster {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 340px; /* Match the image max-width */
-        }
-        .featured-caption {
-            text-align: center;
-            color: #1a5f7a;
-            font-weight: 500;
-        }            
-        
-        .latest-content, .photo-gallery {
-            width: 80%;
-            margin: auto;
-            padding: 40px 0;
-        }
-        .latest-content h3, .photo-gallery h3 {
-            color: #1a5f7a;
-        }
-        .latest-content ul {
-            list-style: none;
-            padding: 0;
-        }
-        .latest-content ul li {
-            margin: 10px 0;
-        }
-        .latest-content a {
-            text-decoration: none;
-            color: #3498db;
-        }
-        .latest-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .latest-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .latest-item a {
-            flex: 1;
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .latest-date {
-            color: #888;
-            font-size: 0.95em;
-            margin-left: 20px;
-            white-space: nowrap;
-        }
-
-        .indicator.active {
-            background-color: #3498db;
-        }
-
-    </style>
-</head>
-<body>
-    <header>
-        <h1>About Me</h1>
-    </header>
-    <div class="container">
-        <div class="profile-image">
-            <img src="https://raw.githubusercontent.com/RevanthMamidala/RevanthMamidala.github.io/main/Revanth_Mamidala.png" alt="Revanth Mamidala">
-            <h3>Revanth Mamidala</h3>
-        </div>
-        <div class="content">
-            <p>Hi there! I am a researcher dedicated to exploring the Water-Energy-Climate nexus and advancing eco-hydrological modeling to protect drinking water resources and promote sustainable agriculture. My current work focuses on drinking water treatment, fate and transport of nutrients, and developing Best Management Practices for drinking water protection in the face of climate change.</p>
-            <p>Previously, I conducted research on hydrodynamic modeling and glacial lake outburst flood (GLOF) modeling and risk analysis, addressing critical challenges in water-related hazard assessment. Earlier in my career, my research centered on the circular economy, resource recovery, and wastewater treatment.</p>
-            <h3>Research Interests:</h3>
-            <ul>
-                <li>Broadly, I am interested in the dynamics of the Water-Food-Energy nexus in future climatic and socio-economic conditions.</li>
-                <li>Eco-hydrologic modeling</li>
-                <li>Nutrient transport modeling</li>
-                <li>Hydrodynamic modeling</li>
-            </ul>
-        </div>
+<!-- About section fragment (no <html>/<head>/<body>) -->
+<div class="content">
+    <div class="profile-intro">
+        <ul>
+            <li>Broadly, I am interested in the dynamics of the Water-Food-Energy nexus in future climatic and socio-economic conditions.</li>
+            <li>Eco-hydrologic modeling</li>
+            <li>Nutrient transport modeling</li>
+            <li>Hydrodynamic modeling</li>
+        </ul>
     </div>
 
-    <!--// Featured Content Section -->
     <div class="featured-content">
         <h3>Featured</h3>
         <div class="featured-items">
             <div class="featured-poster">
-                <a href="FeaturedContent/Revanth Mamidala-ACE25-Poster.pdf" target="_blank">
+                <a href="FeaturedContent/Revanth Mamidala-ACE25-Poster.pdf" target="_blank" rel="noopener">
                     <img src="FeaturedContent/ACE25_Poster.png" alt="ACE25 Conference Poster" class="featured-thumb">
                     <div class="featured-caption">ACE25 Conference Poster (Click to view PDF)</div>
                 </a>
@@ -192,33 +21,27 @@
 
             <div class="featured-linkedin">
                 <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7340432242206261248"
-                    height="600" width="504" frameborder="0" allowfullscreen="" title="LinkedIn Post"></iframe>
+                    height="420" width="504" frameborder="0" allowfullscreen title="LinkedIn Post"></iframe>
                 <div class="featured-caption">See my LinkedIn Post</div>
             </div>
         </div>
     </div>
 
-
-    <!--// Latest Content Section-->
     <div class="latest-content">
         <h3>Latest Content</h3>
         <ul class="latest-list">
             <li class="latest-item">
-                <a href="https://www.linkedin.com/posts/revanth-mamidala-4a13a7158_ace25-activity-7340432242206261248-UCtH?utm_source=share&utm_medium=member_desktop&rcm=ACoAACXJ__kBKQXzrkm7NnRoats3SB8e6NOoeLY" target="_blank">
-                    Represented Iowa Section - AWWA and Presented at ACE25 International Conference, Denver, CO. 
+                <a href="https://www.linkedin.com/posts/revanth-mamidala-4a13a7158_ace25-activity-7340432242206261248-UCtH" target="_blank" rel="noopener">
+                    Represented Iowa Section - AWWA and Presented at ACE25 International Conference, Denver, CO.
                 </a>
                 <span class="latest-date">2024-05-10</span>
             </li>
             <li class="latest-item">
-                <a href="https://medium.com/@mrevanth/the-changing-american-landscape-annual-statistics-of-national-land-cover-data-of-mainland-usa-20d0e1e4ee73" target="_blank">
+                <a href="https://medium.com/@mrevanth/the-changing-american-landscape-annual-statistics-of-national-land-cover-data-of-mainland-usa-20d0e1e4ee73" target="_blank" rel="noopener">
                     The Changing American Landscape: Annual Statistics of National Land Cover Data of Mainland USA
                 </a>
                 <span class="latest-date">2024-06-15</span>
             </li>
-            
-            <!-- Add more items as needed -->
         </ul>
     </div>
-
-</body>
-</html>
+</div>

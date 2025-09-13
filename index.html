@@ -5,407 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revanth Mamidala - Water Resources Engineer</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        html, body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        /* ----- BANNER / HEADER ----- */
-        .banner {
-            background-image: url('backgroundimgs/WisconsinLake.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            min-height: 400px; /* Step 1: Desktops */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            color: #fff;
-        }
-        .banner::after {
-            position: absolute;
-            content: '';
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 38, 96, 0.32); /* Overlay */
-            z-index: 0;
-        }
-        .banner-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 3vw 6vw;
-            text-shadow: 1px 1px 6px rgba(0,0,0,0.55);
-        }
-        .banner-content h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        .banner-content h2 { font-size: 1.5rem; margin-bottom: 16px; font-weight: 400; }
-        .banner-content p  { font-size: 1.15rem; }
-
-        /* ----- NAVIGATION ----- */
-        nav {
-            background: #333;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 10px 0;
-            font-size: 1.1rem;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 6px 18px;
-            padding: 3px 8px;
-            border-radius: 4px;
-            transition: background 0.25s, color 0.3s ease;
-        }
-        nav a:hover,
-        nav a.active {
-            color: #3498db;
-            background: #222;
-            font-weight: 700;
-        }
-
-        /* ----- MAIN CONTAINER ----- */
-        .container {
-            width: 85%;
-            max-width: 1200px;
-            margin: 40px auto;
-            display: flex;
-            align-items: flex-start;
-            gap: 28px;
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 2px 12px rgba(52,152,219,0.09);
-            padding: 38px 36px;
-        }
-        .profile-image {
-            flex: 0 0 210px;
-            text-align: center;
-        }
-        .profile-image img {
-            width: 140px;
-            height: 140px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid #eaf6fb;
-            box-shadow: 0 0 14px rgba(0, 38, 96, 0.09);
-        }
-        .profile-image h3 {
-            margin-top: 13px;
-            color: #1a5f7a;
-            font-size: 1.22rem;
-        }
-        .content {
-            flex: 1;
-            line-height: 1.75;
-            font-size: 1.1rem;
-            padding-left: 18px;
-        }
-        .content h3 {
-            margin-top: 20px;
-            font-size: 1.1rem;
-            color: #1a5f7a;
-        }
-        .content ul {
-            margin-top: 8px;
-        }
-        .content li {
-            margin-bottom: 3px;
-        }
-
-        /* ----- FEATURED & LATEST (GENERIC / FUTURE-PROOF) ----- */
-        .featured-content, .latest-content {
-            width: 90%;
-            max-width: 1100px;
-            margin: 38px auto 0 auto;
-            padding: 25px 0 20px 0;
-        }
-        .featured-content {
-            background: #eaf6fb;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(52,152,219,0.07);
-        }
-        .featured-content h3,
-        .latest-content h3 {
-            text-align: center;
-            color: #1a5f7a;
-            margin-bottom: 22px;
-        }
-        .featured-items {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: stretch;
-            gap: 32px;
-        }
-        .featured-item {
-            flex: 1 1 320px;
-            max-width: 360px;
-            min-width: 220px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(52,152,219,0.13);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-            overflow: hidden;
-            transition: box-shadow 0.2s;
-        }
-        .featured-item:hover {
-            box-shadow: 0 6px 20px rgba(52,152,219,0.20);
-        }
-        .featured-media {
-            width: 100%;
-            max-width: 100%;
-            max-height: 420px;
-            object-fit: contain;
-            background: #f4f4f4;
-            border-radius: 10px 10px 0 0;
-            box-shadow: none;
-        }
-        .featured-caption {
-            text-align: center;
-            color: #1a5f7a;
-            font-weight: 500;
-            padding: 12px 12px;
-            font-size: 1rem;
-        }
-        /* Responsive for different media content */
-        .featured-item iframe.featured-media {
-            border: none;
-            min-height: 250px;
-            background: #eee;
-        }
-
-        .latest-content ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .latest-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
-        }
-        .latest-item a {
-            flex: 1;
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.07rem;
-        }
-        .latest-date {
-            color: #888;
-            font-size: 0.98em;
-            margin-left: 20px;
-            white-space: nowrap;
-        }
-
-        /* ----- FOOTER ----- */
-        footer {
-            background-color: #f9f9f0;
-            padding: 26px 12px;
-            text-align: center;
-            color: #555;
-            font-size: 0.98rem;
-            border-top: 1px solid #e0e0e0;
-            margin-top: 38px;
-        }
-        .contact-info {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 11px auto 18px auto;
-            max-width: 950px;
-            gap: 16px;
-        }
-        .contact-info div {
-            margin: 8px 12px;
-            min-width: 170px;
-        }
-        footer a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* ----- RESPONSIVE DESIGN, 5 BREAKPOINTS ----- */
-        @media (max-width: 1100px) {
-            .banner  { min-height: 325px; }
-            .banner-content h1 { font-size: 2rem; }
-            .banner-content { padding: 3vw 5vw; }
-            .container { width: 95%; padding: 24px 8px; }
-        }
-        @media (max-width: 900px) {
-            .banner  { min-height: 245px; background-position: center top; }
-            .banner-content { padding: 4vw 4vw; }
-            .banner-content h1 { font-size: 1.55rem; }
-            .container { flex-direction: column; align-items: center; padding: 22px 0; }
-            .profile-image { margin-bottom: 24px; }
-            .content { padding: 0; }
-            .featured-items { gap: 20px; }
-            .featured-item { min-width: 180px; max-width: 98vw; flex: 1 1 90vw; }
-            .featured-media { max-height: 280px; }
-        }
-        @media (max-width: 700px) {
-            .banner  { min-height: 170px; background-position: center center; }
-            .banner::after { background: rgba(0,38,96,0.40); }
-            .banner-content { padding: 4vw 2vw; }
-            .banner-content h1 { font-size: 1.25rem; }
-            .banner-content h2, .banner-content p { font-size: 1rem; }
-            .profile-image img { width: 100px; height: 100px; }
-            .profile-image h3 { font-size: 1.05rem; }
-            .container { width: 99%; padding: 10px 0; }
-            .featured-content, .latest-content { width: 99%; padding: 15px 0 10px 0; }
-        }
-        @media (max-width: 600px) {
-            .featured-items { flex-direction: column; gap: 14px; align-items: center; }
-            .featured-item { min-width: 120px; max-width: 99vw; margin: 0 auto; }
-            .featured-media { max-height: 160px; }
-            .container { width: 99vw; }
-        }
-        @media (max-width: 480px) {
-            .banner  { min-height: 90px; }
-            .banner::after { background: rgba(0,38,96,0.5); }
-            .banner-content { padding: 6vw 2vw; }
-            .banner-content h1 { font-size: 1rem; }
-            .banner-content h2, .banner-content p { font-size: 0.95rem; }
-            nav { font-size: 0.98rem; flex-direction: column; }
-            nav a { margin: 3px 6px; }
-            .featured-content h3, .latest-content h3 { font-size: 1.13rem; }
-            .profile-image img { width: 78px; height: 78px; }
-            .container { max-width: 99vw; padding: 3vw 0; }
-        }
-        @media (max-width: 350px) {
-            .banner { min-height: 52px; }
-            .banner-content { padding: 2vw 1vw; }
-            .banner-content h1 { font-size: 0.78rem; }
-            .profile-image img { width: 56px; height: 56px; }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/common.css">
+    <script defer src="assets/js/common.js"></script>
+    <!-- removed large inline styles: consolidated to assets/css/common.css -->
 </head>
 <body>
     <!-- Banner/Header Section -->
     <section class="banner">
         <div class="banner-content">
             <h1>Revanth Mamidala</h1>
-            <h2>Water Resources Engineer &amp; Researcher</h2>
-            <p>
-                Advancing sustainable water, energy, and climate solutions for resilient environments.
-            </p>
+            <p>Water Resources Engineer — Ph.D. Student and Research Assistant at Iowa State University</p>
         </div>
     </section>
+
     <!-- Navigation Bar -->
     <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="education.html">Education & Work Experience</a>
-        <a href="projects.html">Projects</a>
-        <a href="publications.html">Publications</a>
-        <a href="others.html">Others</a>
+        <a href="#" data-page="about_me_section.html" class="nav-link">About</a>
+        <a href="#" data-page="projects_section.html" class="nav-link">Projects</a>
+        <a href="#" data-page="others_section.html" class="nav-link">Others</a>
+        <a href="#" data-page="contact_section.html" class="nav-link">Contact</a>
     </nav>
+
     <!-- Main Content Container -->
     <div class="container">
         <div class="profile-image">
-            <img src="https://raw.githubusercontent.com/RevanthMamidala/RevanthMamidala.github.io/main/Revanth_Mamidala.png" alt="Revanth Mamidala">
+            <img src="profile.jpg" alt="Profile image">
             <h3>Revanth Mamidala</h3>
         </div>
-        <div class="content">
-            <p>Hi there! I am a researcher dedicated to exploring the Water-Energy-Climate nexus and advancing eco-hydrological modeling to protect drinking water resources and promote sustainable agriculture. My current work focuses on drinking water treatment, fate and transport of nutrients, and developing Best Management Practices for drinking water protection in the face of climate change.</p>
-            <p>Previously, I conducted research on hydrodynamic modeling and glacial lake outburst flood (GLOF) modeling and risk analysis, addressing critical challenges in water-related hazard assessment. Earlier in my career, my research centered on the circular economy, resource recovery, and wastewater treatment.</p>
-            <h3>Research Interests:</h3>
-            <ul>
-                <li>Dynamics of the Water-Food-Energy nexus under future climatic and socio-economic conditions</li>
-                <li>Eco-hydrologic modeling</li>
-                <li>Nutrient transport modeling</li>
-                <li>Hydrodynamic modeling</li>
-            </ul>
+
+        <div class="content" id="content">
+            <!-- section fragments will be injected here by loadContent(...) -->
         </div>
     </div>
-    <!-- Featured Section (GENERIC/FLEXIBLE) -->
-    <div class="featured-content">
-        <h3>Featured</h3>
-        <div class="featured-items">
-            <div class="featured-item">
-                <a href="FeaturedContent/Revanth Mamidala-ACE25-Poster.pdf" target="_blank">
-                    <img src="FeaturedContent/ACE25_Poster.png" alt="ACE25 Conference Poster" class="featured-media">
-                    <div class="featured-caption">ACE25 Conference Poster (Click to view PDF)</div>
-                </a>
-            </div>
-            <div class="featured-item">
-                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:activity:7340432242206261248"
-                    class="featured-media" allowfullscreen="" title="LinkedIn Post"></iframe>
-                <div class="featured-caption">See my LinkedIn Post</div>
-            </div>
-            <!-- Example for future content: -->
-            <!--
-            <div class="featured-item">
-                <video src="FeaturedContent/highlight.mp4" class="featured-media" controls></video>
-                <div class="featured-caption">Research Highlights Video</div>
-            </div>
-            <div class="featured-item">
-                <img src="FeaturedContent/new_figure.png" alt="Infographic" class="featured-media">
-                <div class="featured-caption">Environmental Impact Infographic</div>
-            </div>
-            -->
-        </div>
-    </div>
-    <!-- Latest Content Section -->
-    <div class="latest-content">
-        <h3>Latest Content</h3>
-        <ul class="latest-list">
-            <li class="latest-item">
-                <a href="https://www.linkedin.com/posts/revanth-mamidala-4a13a7158_ace25-activity-7340432242206261248-UCtH?utm_source=share&utm_medium=member_desktop&rcm=ACoAACXJ__kBKQXzrkm7NnRoats3SB8e6NOoeLY" target="_blank">
-                    Represented Iowa Section - AWWA and Presented at ACE25 International Conference, Denver, CO.
-                </a>
-                <span class="latest-date">2024-05-10</span>
-            </li>
-            <li class="latest-item">
-                <a href="https://medium.com/@mrevanth/the-changing-american-landscape-annual-statistics-of-national-land-cover-data-of-mainland-usa-20d0e1e4ee73" target="_blank">
-                    The Changing American Landscape: Annual Statistics of National Land Cover Data of Mainland USA
-                </a>
-                <span class="latest-date">2024-06-15</span>
-            </li>
-        </ul>
-    </div>
-    <!-- Footer -->
-    <footer>
-        <div class="contact-info">
-            <div>
-                <strong>For Collaborations</strong><br>
-                Email: <a href="mailto:mrevanth@iastate.edu">mrevanth@iastate.edu</a><br>
-            </div>
-            <div>
-                <strong>Quick Links</strong><br>
-                <a href="https://www.ccee.iastate.edu/liugroup-human-env-research/">The Liu Group: Human-Environment Systems Research</a><br>
-                <a href="https://revanthmamidala.github.io/">Personal Website</a>
-            </div>
-            <div>
-                <strong>Explore Media</strong><br>
-                <a href="https://github.com/revanthmamidala">GitHub</a><br>
-                <a href="https://orcid.org/0000-0002-1854-2495">ORCID</a><br>
-                <a href="https://scholar.google.com/citations?user=jfEY0mUAAAAJ&hl=en">Google Scholar</a><br>
-                <a href="https://www.researchgate.net/profile/Revanth-Mamidala">ResearchGate</a><br>
-                <a href="https://medium.com/@mrevanth">Medium</a><br>
-            </div>
-            <div>
-                <strong>Social Media</strong><br>
-                <a href="https://www.linkedin.com/in/revanth-mamidala-4a13a7158">LinkedIn</a><br>
-                <a href="https://www.instagram.com/mamidalarevanth">Instagram</a><br>
-            </div>
-        </div>
-        <p>&copy; 2025 Revanth Mamidala. All rights reserved.</p>
+
+    <!-- Footer (optional) -->
+    <footer class="text-center" style="padding:20px 0;color:#666">
+        &copy; 2025 Revanth Mamidala
     </footer>
+
+    <!-- Small page initializer: set up nav links and load default fragment -->
+    <script>
+        // wire nav links to loader and manage active class
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('.nav-link');
+            function setActive(el) {
+                links.forEach(l => l.classList.remove('active'));
+                if (el) el.classList.add('active');
+            }
+            links.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const page = this.dataset.page;
+                    if (page) {
+                        loadContent(page);
+                        setActive(this);
+                        history.pushState({page}, '', '#' + page);
+                    }
+                });
+            });
+
+            // handle back/forward navigation
+            window.addEventListener('popstate', (ev) => {
+                const page = (ev.state && ev.state.page) || 'about_me_section.html';
+                loadContent(page);
+                const match = Array.from(links).find(l => l.dataset.page === page);
+                setActive(match);
+            });
+
+            // initial load: use hash or default to about_me_section.html
+            const initial = location.hash ? location.hash.replace('#', '') : 'about_me_section.html';
+            const initialLink = Array.from(links).find(l => l.dataset.page === initial);
+            if (initialLink) setActive(initialLink);
+            loadContent(initial);
+        });
+    </script>
 </body>
 </html>
