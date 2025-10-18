@@ -1,83 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revanth Mamidala - Water Resources Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/common.css">
-    <script defer src="assets/js/common.js"></script>
-    <!-- removed large inline styles: consolidated to assets/css/common.css -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revanth Mamidala - Water Resources Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/common.css">
+  <script defer src="assets/js/common.js"></script>
 </head>
 <body>
-    <!-- Banner/Header Section -->
-    <section class="banner">
-        <div class="banner-content">
-            <h1>Revanth Mamidala</h1>
-            <p>Water Resources Engineer — Ph.D. Student and Research Assistant at Iowa State University</p>
-        </div>
-    </section>
-
-    <!-- Navigation Bar -->
-    <nav>
-        <a href="#" data-page="about_me_section.html" class="nav-link">About</a>
-        <a href="#" data-page="projects_section.html" class="nav-link">Projects</a>
-        <a href="#" data-page="others_section.html" class="nav-link">Others</a>
-        <a href="#" data-page="contact_section.html" class="nav-link">Contact</a>
-    </nav>
-
-    <!-- Main Content Container -->
-    <div class="container">
-        <div class="profile-image">
-            <img src="profile.jpg" alt="Profile image">
-            <h3>Revanth Mamidala</h3>
-        </div>
-
-        <div class="content" id="content">
-            <!-- section fragments will be injected here by loadContent(...) -->
-        </div>
+  <!-- Banner/Header Section -->
+  <header class="banner">
+    <div class="banner-content">
+      <h1>Revanth Mamidala</h1>
+      <p>Water Resources Engineer — Ph.D. Student and Research Assistant at Iowa State University</p>
     </div>
+  </header>
 
-    <!-- Footer (optional) -->
-    <footer class="text-center" style="padding:20px 0;color:#666">
-        &copy; 2025 Revanth Mamidala
-    </footer>
+  <!-- Navigation Bar -->
+  <nav aria-label="Site main">
+    <a href="#" data-page="about_me_section.html" class="nav-link" aria-current="page">About</a>
+    <a href="#" data-page="projects_section.html" class="nav-link">Projects</a>
+    <a href="#" data-page="others_section.html" class="nav-link">Others</a>
+    <a href="#" data-page="contact_section.html" class="nav-link">Contact</a>
+  </nav>
 
-    <!-- Small page initializer: set up nav links and load default fragment -->
-    <script>
-        // wire nav links to loader and manage active class
-        document.addEventListener('DOMContentLoaded', function () {
-            const links = document.querySelectorAll('.nav-link');
-            function setActive(el) {
-                links.forEach(l => l.classList.remove('active'));
-                if (el) el.classList.add('active');
-            }
-            links.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const page = this.dataset.page;
-                    if (page) {
-                        loadContent(page);
-                        setActive(this);
-                        history.pushState({page}, '', '#' + page);
-                    }
-                });
-            });
+  <!-- Main Content Container -->
+<main class="container" role="main">
+  <section class="content" id="content" tabindex="-1">
+    <!-- section fragments will be injected here by loadContent(...) -->
+  </section>
+</main>
 
-            // handle back/forward navigation
-            window.addEventListener('popstate', (ev) => {
-                const page = (ev.state && ev.state.page) || 'about_me_section.html';
-                loadContent(page);
-                const match = Array.from(links).find(l => l.dataset.page === page);
-                setActive(match);
-            });
+  <!-- Footer -->
+  <footer class="text-center" style="padding:20px 0;color:#666">
+    &copy; 2025 Revanth Mamidala
+  </footer>
 
-            // initial load: use hash or default to about_me_section.html
-            const initial = location.hash ? location.hash.replace('#', '') : 'about_me_section.html';
-            const initialLink = Array.from(links).find(l => l.dataset.page === initial);
-            if (initialLink) setActive(initialLink);
-            loadContent(initial);
+  <!-- Nav logic initializer -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const links = document.querySelectorAll('.nav-link');
+      function setActive(el) {
+        links.forEach(l => l.classList.remove('active'));
+        if (el) el.classList.add('active');
+        links.forEach(l => l.removeAttribute('aria-current'));
+        if (el) el.setAttribute('aria-current', 'page');
+      }
+      links.forEach(link => {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const page = this.dataset.page;
+          if (page) {
+            loadContent(page);
+            setActive(this);
+            history.pushState({page}, '', '#' + page);
+          }
         });
-    </script>
+      });
+      // Handle back/forward
+      window.addEventListener('popstate', (ev) => {
+        const page = (ev.state && ev.state.page) || 'about_me_section.html';
+        loadContent(page);
+        const match = Array.from(links).find(l => l.dataset.page === page);
+        setActive(match);
+      });
+      // Initial load
+      const initial = location.hash ? location.hash.replace('#', '') : 'about_me_section.html';
+      const initialLink = Array.from(links).find(l => l.dataset.page === initial);
+      if (initialLink) setActive(initialLink);
+      loadContent(initial);
+    });
+  </script>
 </body>
 </html>

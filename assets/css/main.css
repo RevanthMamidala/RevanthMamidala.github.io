@@ -1,0 +1,191 @@
+/* ===========================================
+   ==============  COMMON STYLES  =============
+   =========================================== */
+
+:root {
+  --primary: #1a5f7a;
+  --accent:  #3498db;
+  --muted:   #eaf6fb;
+  --bg:      #f4f4f4;
+  --card-shadow: 0 2px 12px rgba(52,152,219,0.09);
+  --radius: 14px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', system-ui, Arial, sans-serif;
+  background: var(--bg);
+  color: #222;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* ---------- Banner/Header ---------- */
+.banner {
+  background: url('../../backgroundimgs/WisconsinLake.jpg') no-repeat center center/cover;
+  min-height: 260px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,38,96,0.32);
+}
+.banner-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 1rem;
+}
+
+/* ---------- Navigation ---------- */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 1rem 0;
+}
+nav a {
+  display: inline-block;
+  padding: 0.5em 1em;
+  color: #222;
+  background: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color .15s, background .15s;
+}
+nav a:hover,
+nav a.active {
+  color: var(--accent);
+  background: #222;
+  font-weight: 700;
+}
+
+/* ---------- Main Container/Layout ---------- */
+.container {
+  width: 100%;
+  max-width: min(92vw, 580px); /* Shrinks on mobile, never gets too wide on desktop */
+  margin: 36px auto 0 auto;
+  background: #fff;
+  border-radius: var(--radius, 14px);
+  box-shadow: var(--card-shadow, 0 2px 12px rgba(52,152,219,0.09));
+  padding: 2.2rem 2rem 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+/* ...media queries for .container... */
+@media (max-width: 2700px) {
+  .container {
+    max-width: 98vw;
+    padding: 1.2rem 1.1rem 1.5rem 1.1rem;
+    margin: 18px 1vw 0 1vw;
+  }
+}
+@media (max-width: 480px) {
+  .container {
+    max-width: 100vw;
+    padding: 0.6rem 0.25rem 1.1rem 0.25rem;
+    margin: 6px 0 0 0;
+    border-radius: 0;
+  }
+}
+
+/* ---------- Utilities (alignment, text) ---------- */
+.text-center { text-align: center; }
+
+/* Responsive Utilities */
+@media (max-width: 500px) { ... }
+@media (min-width: 640px) { ... }
+
+
+/* ===========================================
+   ==========  ABOUT PAGE STYLES  =============
+   =========================================== */
+
+/* Profile section only displayed on "About" page */
+.profile-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 180px;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.profile-image img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--muted);
+  box-shadow: 0 0 14px rgba(0,38,96,0.09);
+}
+.profile-image h3 {
+  margin-top: 0.9em;
+  color: var(--primary);
+  font-size: 1.12rem;
+  font-weight: 600;
+}
+@media (min-width: 800px) {
+  .profile-image img { width: 140px; height: 140px; }
+  .profile-image { margin-bottom: 0; }
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2rem 0 1.2rem 0;
+  justify-content: flex-start;
+}
+.about-photo img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 14px rgba(0,38,96,0.09);
+  border: 3px solid var(--muted);
+}
+.about-info { flex: 1; }
+.about-info h2 { margin-bottom: 0.5rem; color: var(--primary); }
+.about-bio { margin: 0 0 1.2rem 0; font-size: 1.08rem; color: #224; }
+.interests-list { margin: 0.2em 0 0 1.2em; padding: 0; font-size: 1.03rem; }
+.interests-list li { margin-bottom: 0.12em; }
+@media (max-width: 700px) {
+  .about-header { flex-direction: column; gap: 1.2rem; align-items: flex-start; }
+  .about-photo img { width: 110px; height: 110px; }
+}
+
+/* ===========================================
+   =  Education and Experience PAGE STYLES  ==
+   =========================================== */
+
+/* ===========================================
+   ==========  PROJECTS PAGE STYLES  =========
+   =========================================== */
+
+/* You can add your projects-specific styles here
+   Example:
+.project-card { ... }
+.project-tags { ... }
+*/
+
+/* ===========================================
+   ====  FEATURED / GALLERY (ANY PAGE) =======
+   =========================================== */
