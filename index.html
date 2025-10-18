@@ -5,72 +5,171 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Revanth Mamidala - Water Resources Engineer</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/common.css">
-  <script defer src="assets/js/common.js"></script>
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    main {
+      flex: 1;
+    }
+  </style>
 </head>
 <body>
-  <!-- Banner/Header Section -->
-  <header class="banner">
-    <div class="banner-content">
-      <h1>Revanth Mamidala</h1>
-      <p>Water Resources Engineer — Ph.D. Student and Research Assistant at Iowa State University</p>
-    </div>
-  </header>
+  <div class="page-wrapper">
+    <header>
+      <div class="banner header-banner">
+        <div class="banner-content">
+          <h1>Revanth Mamidala - Water Resources Engineer</h1>
+          <p>Science · Sustainability · Water · Data</p>
+        </div>
+      </div>
+    </header>
 
-  <!-- Navigation Bar -->
-  <nav aria-label="Site main">
-    <a href="#" data-page="about_me_section.html" class="nav-link" aria-current="page">About</a>
-    <a href="#" data-page="projects_section.html" class="nav-link">Projects</a>
-    <a href="#" data-page="others_section.html" class="nav-link">Others</a>
-    <a href="#" data-page="contact_section.html" class="nav-link">Contact</a>
-  </nav>
+    <nav aria-label="Site main" class="header-nav">
+      <a href="home.html" class="nav-link" aria-current="page">Home</a>
+      <a href="educationexperience.html" class="nav-link">Education and Experience</a>
+      <a href="publications.html" class="nav-link">Publications</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="mosaic.html" class="nav-link">Mosaic</a>
+    </nav>
 
-  <!-- Main Content Container -->
-<main class="container" role="main">
-  <section class="content" id="content" tabindex="-1">
-    <!-- section fragments will be injected here by loadContent(...) -->
-  </section>
-</main>
 
-  <!-- Footer -->
-  <footer class="text-center" style="padding:20px 0;color:#666">
-    &copy; 2025 Revanth Mamidala
-  </footer>
+    <main>
+      <h2>Welcome!</h2>
+      <p>This is the initial landing content.</p>
+    </main>
 
-  <!-- Nav logic initializer -->
+    <footer>
+      <div class="banner footer-banner">
+        <div class="banner-content">
+          <p>&copy; 2025 Revanth Mamidala. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- SPA Navigation Script -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const links = document.querySelectorAll('.nav-link');
+
       function setActive(el) {
         links.forEach(l => l.classList.remove('active'));
         if (el) el.classList.add('active');
         links.forEach(l => l.removeAttribute('aria-current'));
         if (el) el.setAttribute('aria-current', 'page');
       }
+
       links.forEach(link => {
         link.addEventListener('click', function (e) {
           e.preventDefault();
-          const page = this.dataset.page;
+          const page = this.getAttribute('href');
           if (page) {
             loadContent(page);
             setActive(this);
-            history.pushState({page}, '', '#' + page);
+            history.pushState({ page }, '', '#' + page);
           }
         });
       });
-      // Handle back/forward
+
       window.addEventListener('popstate', (ev) => {
-        const page = (ev.state && ev.state.page) || 'about_me_section.html';
+        const page = (ev.state && ev.state.page) || 'home.html';
         loadContent(page);
-        const match = Array.from(links).find(l => l.dataset.page === page);
+        const match = Array.from(links).find(l => l.getAttribute('href') === page);
         setActive(match);
       });
-      // Initial load
-      const initial = location.hash ? location.hash.replace('#', '') : 'about_me_section.html';
-      const initialLink = Array.from(links).find(l => l.dataset.page === initial);
+
+      const initial = location.hash ? location.hash.replace('#', '') : 'home.html';
+      const initialLink = Array.from(links).find(l => l.getAttribute('href') === initial);
       if (initialLink) setActive(initialLink);
-      loadContent(initial);
+      // ✅ Detect if it's a project detail page
+      if (initial.startsWith('ProjectsPage/')) {
+        loadProjectDetail(initial);
+      } else {
+        loadContent(initial);
+      }
     });
+
+    function loadContent(page) {
+      fetch(page)
+        .then(response => {
+          if (!response.ok) throw new Error('Network response was not ok');
+          return response.text();
+        })
+        .then(html => {
+          const container = document.querySelector('main');
+
+          // Apply fade-out before content swap (optional smooth transition)
+          container.style.opacity = 0;
+
+          // Wait for fade-out, then inject new content
+          setTimeout(() => {
+            container.innerHTML = html;
+
+            // Fade-in after new content is inserted
+            container.style.transition = 'opacity 0.4s ease-in-out';
+            container.style.opacity = 1;
+
+            // 🔹 Map of page-specific scripts
+            const pageScripts = {
+              'projects.html': 'scripts/projects.js',
+              'mosaic.html': 'scripts/mosaic.js'
+              // You can add more later like:
+              // 'publications.html': 'scripts/publications.js'
+            };
+
+            // 🔹 If the current page needs a script, attach it dynamically
+            if (pageScripts[page]) {
+              const script = document.createElement('script');
+              script.src = pageScripts[page];
+              script.defer = true;
+              document.body.appendChild(script);
+            }
+
+            // 🔹 Scroll to top after page load
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }, 150); // delay for fade-out effect
+        })
+        .catch(err => {
+          console.error('Failed to load page:', err);
+          const container = document.querySelector('main');
+          container.innerHTML = `
+            <div class="error-container">
+              <h2>Error</h2>
+              <p>Failed to load content. Please try again later.</p>
+            </div>
+          `;
+          container.style.opacity = 1;
+        });
+    }
+
+    function loadProjectDetail(page) {
+      fetch(page)
+        .then(response => {
+          if (!response.ok) throw new Error('Network response was not ok');
+          return response.text();
+        })
+        .then(html => {
+          const container = document.querySelector('main');
+          container.innerHTML = `
+            <button class="btn-read-more" style="margin: 1rem;" onclick="loadContent('projects.html'); history.pushState({page: 'projects.html'}, '', '#projects.html');">← Back to Projects</button>
+            ${html}
+          `;
+          history.pushState({ page }, '', '#' + page);
+        })
+        .catch(err => {
+          console.error('Failed to load project detail:', err);
+          document.querySelector('main').innerHTML = '<h2>Error</h2><p>Failed to load project detail.</p>';
+        });
+    }
   </script>
+
 </body>
 </html>
