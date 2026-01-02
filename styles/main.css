@@ -799,12 +799,15 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   height: 100%;
   width: 100%;
-  position: relative;
 }
 
 .gallery-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   max-width: 600px;
   height: 100%;
