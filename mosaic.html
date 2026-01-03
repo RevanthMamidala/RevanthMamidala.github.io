@@ -1,88 +1,59 @@
 <main class="mosaic-container">
-    <!-- Photo Gallery Section -->
-    <section
-      class="mosaic-section photo-gallery-section"
-      aria-labelledby="photo-gallery-heading"
-    >
-      <header class="section-title">
-        <h2 id="photo-gallery-heading">Photo Gallery</h2>
-      </header>
+  <!-- Photo Gallery Section -->
+  <section class="mosaic-section photo-gallery-section" aria-labelledby="photo-gallery-heading">
+    <header class="section-title">
+      <h2 id="photo-gallery-heading">Photo Gallery</h2>
+    </header>
 
-      <div class="photo-gallery">
-        <button
-          class="arrow arrow-left"
-          type="button"
-          aria-label="Previous photo"
-        >
-          &#9664;
-        </button>
+    <div class="photo-gallery">
+      <button class="arrow arrow-left" type="button" aria-label="Previous photo">
+        &#9664;
+      </button>
 
-        <div class="photo-gallery-slide" id="photoGallery">
-          <!-- First image marked active so it shows even if JS fails -->
-          <img
-            class="gallery-image active"
-            src="https://images.pexels.com/photos/5944199/pexels-photo-5944199.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-            alt="Gallery image 1"
-          />
+      <div class="photo-gallery-slide" id="photoGallery">
+        <!-- First image active by default -->
+        <img class="gallery-image active"
+          src="https://images.pexels.com/photos/5944199/pexels-photo-5944199.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+          alt="Gallery image 1" />
 
-          <img
-            class="gallery-image"
-            src="https://static.vecteezy.com/system/resources/previews/038/455/910/non_2x/ai-generated-explore-the-intricate-details-of-a-close-up-shot-showcasing-bright-and-colorful-flowers-in-all-their-glory-ai-generated-photo.jpg"
-            alt="Gallery image 2"
-          />
+        <img class="gallery-image"
+          src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+          alt="Gallery image 2" />
 
-          <!-- Use your local images instead if you want:
-          <img class="gallery-image" src="./PhotoGallery/1Z0A6122.jpg" alt="Gallery image 2" />
-          <img class="gallery-image" src="./PhotoGallery/20230618_131906.jpg" alt="Gallery image 3" />
-          <img class="gallery-image" src="./PhotoGallery/1000003650.JPEG" alt="Gallery image 4" />
-          <img class="gallery-image" src="./PhotoGallery/Revath_Mamidala - Copy.jpg" alt="Gallery image 5" />
-          <img class="gallery-image" src="./PhotoGallery/Revath_Mamidala.jpg" alt="Gallery image 6" />
-          -->
-        </div>
-
-        <button
-          class="arrow arrow-right"
-          type="button"
-          aria-label="Next photo"
-        >
-          &#9654;
-        </button>
+        <img class="gallery-image"
+          src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+          alt="Gallery image 3" />
       </div>
 
-      <div
-        class="gallery-indicators"
-        id="indicators"
-        aria-label="Photo navigation"
-      ></div>
-    </section>
+      <button class="arrow arrow-right" type="button" aria-label="Next photo">
+        &#9654;
+      </button>
+    </div>
 
-    <!-- Hobbies Section -->
-    <section
-      class="mosaic-section hobbies-section"
-      aria-labelledby="hobbies-heading"
-    >
-      <header class="section-title">
-        <h2 id="hobbies-heading">Hobbies &amp; Interests</h2>
-      </header>
-      <ul class="mosaic-list">
-        <li>Photography</li>
-        <li>Traveling</li>
-        <li>Cooking</li>
-      </ul>
-    </section>
+    <div class="gallery-indicators" id="indicators" aria-label="Photo navigation"></div>
+  </section>
 
-    <!-- Awards Section -->
-    <section
-      class="mosaic-section awards-section"
-      aria-labelledby="awards-heading"
-    >
-      <header class="section-title">
-        <h2 id="awards-heading">Awards &amp; Recognitions</h2>
-      </header>
-      <ul class="mosaic-list">
-        <li>Best Poster Award, IA-AWWA Conference (2024)</li>
-      </ul>
-    </section>
-  </main>
+  <!-- Hobbies Section -->
+  <section class="mosaic-section hobbies-section" aria-labelledby="hobbies-heading">
+    <header class="section-title">
+      <h2 id="hobbies-heading">Hobbies &amp; Interests</h2>
+    </header>
+    <ul class="mosaic-list">
+      <li>Photography</li>
+      <li>Traveling</li>
+      <li>Cooking</li>
+    </ul>
+  </section>
 
-  <script src="scripts/mosaic.js" defer></script>
+  <!-- Awards Section -->
+  <section class="mosaic-section awards-section" aria-labelledby="awards-heading">
+    <header class="section-title">
+      <h2 id="awards-heading">Awards &amp; Recognitions</h2>
+    </header>
+    <ul class="mosaic-list">
+      <li>Best Poster Award, IA-AWWA Conference (2024)</li>
+    </ul>
+  </section>
+</main>
+
+<script src="scripts/mosaic.js" defer></script>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mosaic Gallery Test</title>
+  <style>
+    /*===========================================
+    ============= Mosaic Page Styles ============
+    ===========================================*/
+
+    /* Layout container */
+    .mosaic-container {
+      width: 96%;
+      max-width: 1400px;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* Sections */
+    .mosaic-section {
+      background: #fff;
+      padding: 1.2rem 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Section titles */
+    .section-title h2 {
+      color: #1a5f7a;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #3498db;
+      padding-left: 0.6rem;
+    }
+
+    /* Lists */
+    .mosaic-list {
+      list-style-type: disc;
+      padding-left: 1.3rem;
+      line-height: 1.8;
+      color: #333;
+    }
+
+    /* ---- Photo Gallery ---- */
+    .photo-gallery {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 280px;
+      overflow: hidden;
+      border-radius: 10px;
+      background-color: #f9fafb;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .photo-gallery-slide {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Gallery images */
+    .gallery-image {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 100%;
+      max-width: 600px;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+    }
+
+    .gallery-image.active {
+      opacity: 1;
+    }
+
+    /* Arrows */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 5;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      padding: 10px 15px;
+      transition: background 0.3s;
+    }
+
+    .arrow:hover:not(:disabled) {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .arrow:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+
+    .arrow-left {
+      left: 15px;
+    }
+
+    .arrow-right {
+      right: 15px;
+    }
+
+    /* Gallery indicators (dots) */
+    .gallery-indicators {
+      display: flex;
+      justify-content: center;
+      margin-top: 0.8rem;
+      gap: 8px;
+    }
+
+    .indicator {
+      width: 12px;
+      height: 12px;
+      background: #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      transition: background 0.3s;
+    }
+
+    .indicator.active {
+      background: #3498db;
+    }
+
+    /* Loading state (if used) */
+    .loading-message {
+      text-align: center;
+      color: #666;
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+
+    /* ---- Responsive tweaks ---- */
+    @media (max-width: 768px) {
+      .mosaic-container {
+        width: 98%;
+      }
+
+      .photo-gallery {
+        height: 220px;
+      }
+
+      .section-title h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mosaic-section {
+        padding: 1rem 0.8rem;
+      }
+
+      .photo-gallery {
+        height: 200px;
+      }
+
+      .section-title h2 {
+        font-size: 1.3rem;
+      }
+
+      .arrow {
+        font-size: 1.6rem;
+        padding: 8px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="mosaic-container">
+    <!-- Photo Gallery Section -->
+    <section
+      class="mosaic-section photo-gallery-section"
+      aria-labelledby="photo-gallery-heading"
+    >
+      <header class="section-title">
+        <h2 id="photo-gallery-heading">Photo Gallery</h2>
+      </header>
+
+      <div class="photo-gallery">
+        <button
+          class="arrow arrow-left"
+          type="button"
+          aria-label="Previous photo"
+        >
+          &#9664;
+        </button>
+
+        <div class="photo-gallery-slide" id="photoGallery">
+          <!-- First image active by default -->
+          <img
+            class="gallery-image active"
+            src="https://images.pexels.com/photos/5944199/pexels-photo-5944199.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+            alt="Gallery image 1"
+          />
+
+          <img
+            class="gallery-image"
+            src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+            alt="Gallery image 2"
+          />
+
+          <img
+            class="gallery-image"
+            src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+            alt="Gallery image 3"
+          />
+        </div>
+
+        <button
+          class="arrow arrow-right"
+          type="button"
+          aria-label="Next photo"
+        >
+          &#9654;
+        </button>
+      </div>
+
+      <div
+        class="gallery-indicators"
+        id="indicators"
+        aria-label="Photo navigation"
+      ></div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section
+      class="mosaic-section hobbies-section"
+      aria-labelledby="hobbies-heading"
+    >
+      <header class="section-title">
+        <h2 id="hobbies-heading">Hobbies &amp; Interests</h2>
+      </header>
+      <ul class="mosaic-list">
+        <li>Photography</li>
+        <li>Traveling</li>
+        <li>Cooking</li>
+      </ul>
+    </section>
+
+    <!-- Awards Section -->
+    <section
+      class="mosaic-section awards-section"
+      aria-labelledby="awards-heading"
+    >
+      <header class="section-title">
+        <h2 id="awards-heading">Awards &amp; Recognitions</h2>
+      </header>
+      <ul class="mosaic-list">
+        <li>Best Poster Award, IA-AWWA Conference (2024)</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const galleryContainer = document.getElementById("photoGallery");
+      const indicatorsContainer = document.getElementById("indicators");
+      const prevArrow = document.querySelector(".arrow-left");
+      const nextArrow = document.querySelector(".arrow-right");
+
+      if (!galleryContainer || !indicatorsContainer || !prevArrow || !nextArrow) {
+        return;
+      }
+
+      const images = Array.from(
+        galleryContainer.querySelectorAll(".gallery-image")
+      );
+
+      if (!images.length) return;
+
+      let slideIndex = 0;
+
+      function showSlide(index) {
+        slideIndex = (index + images.length) % images.length;
+
+        images.forEach((img, i) => {
+          img.classList.toggle("active", i === slideIndex);
+        });
+
+        const dots = indicatorsContainer.querySelectorAll(".indicator");
+        dots.forEach((dot, i) => {
+          dot.classList.toggle("active", i === slideIndex);
+        });
+      }
+
+      function nextSlide() {
+        showSlide(slideIndex + 1);
+      }
+
+      function prevSlide() {
+        showSlide(slideIndex - 1);
+      }
+
+      function initializeIndicators() {
+        indicatorsContainer.innerHTML = "";
+
+        images.forEach((_, index) => {
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "indicator";
+          dot.setAttribute("aria-label", `Go to slide ${index + 1}`);
+
+          dot.addEventListener("click", () => {
+            showSlide(index);
+          });
+
+          indicatorsContainer.appendChild(dot);
+        });
+      }
+
+      prevArrow.addEventListener("click", nextSlide); // left arrow goes to previous? choose behavior
+      nextArrow.addEventListener("click", nextSlide);
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") prevSlide();
+        if (e.key === "ArrowRight") nextSlide();
+      });
+
+      initializeIndicators();
+      showSlide(0);
+
+      if (images.length <= 1) {
+        prevArrow.disabled = true;
+        nextArrow.disabled = true;
+      }
+    });
+  </script>
+</body>
+</html>

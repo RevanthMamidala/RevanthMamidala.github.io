@@ -834,181 +834,181 @@ footer {
 
 
 /*===========================================
-============= Mosaic Page Styles ============
-===========================================*/
+    ============= Mosaic Page Styles ============
+    ===========================================*/
 
-/* Layout container */
-.mosaic-container {
-  width: 96%;
-  max-width: 1400px;
-  margin: 2rem auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
+    /* Layout container */
+    .mosaic-container {
+      width: 96%;
+      max-width: 1400px;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
 
-/* Sections */
-.mosaic-section {
-  background: #fff;
-  padding: 1.2rem 1rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
+    /* Sections */
+    .mosaic-section {
+      background: #fff;
+      padding: 1.2rem 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
 
-/* Section titles */
-.section-title h2 {
-  color: #1a5f7a;
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  border-left: 4px solid #3498db;
-  padding-left: 0.6rem;
-}
+    /* Section titles */
+    .section-title h2 {
+      color: #1a5f7a;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #3498db;
+      padding-left: 0.6rem;
+    }
 
-/* Lists */
-.mosaic-list {
-  list-style-type: disc;
-  padding-left: 1.3rem;
-  line-height: 1.8;
-  color: #333;
-}
+    /* Lists */
+    .mosaic-list {
+      list-style-type: disc;
+      padding-left: 1.3rem;
+      line-height: 1.8;
+      color: #333;
+    }
 
-/* ---- Photo Gallery ---- */
-.photo-gallery {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 280px;
-  overflow: hidden;
-  border-radius: 10px;
-  background-color: #f9fafb;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-}
+    /* ---- Photo Gallery ---- */
+    .photo-gallery {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 280px;
+      overflow: hidden;
+      border-radius: 10px;
+      background-color: #f9fafb;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
 
-.photo-gallery-slide {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    .photo-gallery-slide {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-/* Dynamic images */
-.gallery-image {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 100%;
-  max-width: 600px;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  opacity: 0;
-  transition: opacity 0.6s ease-in-out; /* FIXED: was 100s */
-}
+    /* Gallery images */
+    .gallery-image {
+      position: absolute;
+      inset: 0;
+      margin: auto;
+      width: 100%;
+      max-width: 600px;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+    }
 
-.gallery-image.active {
-  opacity: 1;
-}
+    .gallery-image.active {
+      opacity: 1;
+    }
 
-/* Arrows */
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  cursor: pointer;
-  z-index: 5;
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  padding: 10px 15px;
-  transition: background 0.3s;
-}
+    /* Arrows */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 5;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      padding: 10px 15px;
+      transition: background 0.3s;
+    }
 
-.arrow:hover:not(:disabled) {
-  background: rgba(0, 0, 0, 0.7);
-}
+    .arrow:hover:not(:disabled) {
+      background: rgba(0, 0, 0, 0.7);
+    }
 
-.arrow:disabled {
-  opacity: 0.4;
-  cursor: default;
-}
+    .arrow:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
 
-.arrow-left {
-  left: 15px;
-}
+    .arrow-left {
+      left: 15px;
+    }
 
-.arrow-right {
-  right: 15px;
-}
+    .arrow-right {
+      right: 15px;
+    }
 
-/* Gallery indicators (dots) */
-.gallery-indicators {
-  display: flex;
-  justify-content: center;
-  margin-top: 0.8rem;
-  gap: 8px;
-}
+    /* Gallery indicators (dots) */
+    .gallery-indicators {
+      display: flex;
+      justify-content: center;
+      margin-top: 0.8rem;
+      gap: 8px;
+    }
 
-.indicator {
-  width: 12px;
-  height: 12px;
-  background: #ccc;
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-  padding: 0;
-  transition: background 0.3s;
-}
+    .indicator {
+      width: 12px;
+      height: 12px;
+      background: #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      transition: background 0.3s;
+    }
 
-.indicator.active {
-  background: #3498db;
-}
+    .indicator.active {
+      background: #3498db;
+    }
 
-/* Loading state (if used) */
-.loading-message {
-  text-align: center;
-  color: #666;
-  font-style: italic;
-  font-size: 0.95rem;
-}
+    /* Loading state (if used) */
+    .loading-message {
+      text-align: center;
+      color: #666;
+      font-style: italic;
+      font-size: 0.95rem;
+    }
 
-/* ---- Responsive tweaks ---- */
-@media (max-width: 768px) {
-  .mosaic-container {
-    width: 98%;
-  }
+    /* ---- Responsive tweaks ---- */
+    @media (max-width: 768px) {
+      .mosaic-container {
+        width: 98%;
+      }
 
-  .photo-gallery {
-    height: 220px;
-  }
+      .photo-gallery {
+        height: 220px;
+      }
 
-  .section-title h2 {
-    font-size: 1.5rem;
-  }
-}
+      .section-title h2 {
+        font-size: 1.5rem;
+      }
+    }
 
-@media (max-width: 480px) {
-  .mosaic-section {
-    padding: 1rem 0.8rem;
-  }
+    @media (max-width: 480px) {
+      .mosaic-section {
+        padding: 1rem 0.8rem;
+      }
 
-  .photo-gallery {
-    height: 200px;
-  }
+      .photo-gallery {
+        height: 200px;
+      }
 
-  .section-title h2 {
-    font-size: 1.3rem;
-  }
+      .section-title h2 {
+        font-size: 1.3rem;
+      }
 
-  .arrow {
-    font-size: 1.6rem;
-    padding: 8px 12px;
-  }
-}
+      .arrow {
+        font-size: 1.6rem;
+        padding: 8px 12px;
+      }
+    }
 
 
 /*===========================================

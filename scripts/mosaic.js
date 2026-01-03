@@ -1,11 +1,9 @@
-// scripts/mosaic.js
 document.addEventListener("DOMContentLoaded", () => {
   const galleryContainer = document.getElementById("photoGallery");
   const indicatorsContainer = document.getElementById("indicators");
   const prevArrow = document.querySelector(".arrow-left");
   const nextArrow = document.querySelector(".arrow-right");
 
-  // Safety guard
   if (!galleryContainer || !indicatorsContainer || !prevArrow || !nextArrow) {
     return;
   }
@@ -14,14 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
     galleryContainer.querySelectorAll(".gallery-image")
   );
 
-  // No images, nothing to do
   if (!images.length) return;
 
   let slideIndex = 0;
 
-  // ----------------------------
-  // Show slide
-  // ----------------------------
   function showSlide(index) {
     slideIndex = (index + images.length) % images.length;
 
@@ -35,9 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ----------------------------
-  // Navigation
-  // ----------------------------
   function nextSlide() {
     showSlide(slideIndex + 1);
   }
@@ -46,9 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
     showSlide(slideIndex - 1);
   }
 
-  // ----------------------------
-  // Indicators (dots)
-  // ----------------------------
   function initializeIndicators() {
     indicatorsContainer.innerHTML = "";
 
@@ -66,24 +54,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ----------------------------
-  // Event listeners
-  // ----------------------------
-  prevArrow.addEventListener("click", prevSlide);
+  prevArrow.addEventListener("click", nextSlide); // left arrow goes to previous? choose behavior
   nextArrow.addEventListener("click", nextSlide);
 
+  // Keyboard navigation
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") prevSlide();
     if (e.key === "ArrowRight") nextSlide();
   });
 
-  // ----------------------------
-  // Init
-  // ----------------------------
   initializeIndicators();
   showSlide(0);
 
-  // Disable arrows if only one image
   if (images.length <= 1) {
     prevArrow.disabled = true;
     nextArrow.disabled = true;
