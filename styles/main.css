@@ -1010,6 +1010,74 @@ footer {
       }
     }
 
+  /* Static Image Gallery Styles */
+  .static-images-section {
+    background: #fff;
+    padding: 1.5rem 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .static-images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .static-image-item {
+    display: flex;
+    flex-direction: column;
+    background: #f9fafb;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .static-image-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  .static-image-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .image-caption {
+    padding: 0.8rem;
+    text-align: center;
+    color: #1a5f7a;
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin: 0;
+    background: #fff;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .static-images-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .static-image-item img {
+      height: 200px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .static-images-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .static-image-item img {
+      height: 220px;
+    }
+  }
 
 /*===========================================
 ============= Publications Page Styles ======
