@@ -1,43 +1,25 @@
-<main class="mosaic-container">
-  <!-- Photo Gallery Section -->
-  <section class="mosaic-section photo-gallery-section" aria-labelledby="photo-gallery-heading">
-    <header class="section-title">
-      <h2 id="photo-gallery-heading">Photo Gallery</h2>
-    </header>
+<div class="mosaic-container">
 
-    <div class="photo-gallery">
-      <button class="arrow arrow-left" type="button" aria-label="Previous photo">
-        &#9664;
-      </button>
-
-      <div class="photo-gallery-slide" id="photoGallery">
-        <!-- First image active by default -->
-        <img class="gallery-image active"
-          src="https://images.pexels.com/photos/5944199/pexels-photo-5944199.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-          alt="Gallery image 1" />
-
-        <img class="gallery-image"
-          src="https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-          alt="Gallery image 2" />
-
-        <img class="gallery-image"
-          src="https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-          alt="Gallery image 3" />
-      </div>
-
-      <button class="arrow arrow-right" type="button" aria-label="Next photo">
-        &#9654;
-      </button>
+  <section class="mosaic-section photo-gallery-section">
+    <div class="section-title">
+      <h2>Photo Gallery</h2>
     </div>
 
-    <div class="gallery-indicators" id="indicators" aria-label="Photo navigation"></div>
+    <div class="photo-gallery">
+      <button class="arrow arrow-left">&#9664;</button>
+      <div class="photo-gallery-slide" id="photoGallery">
+        <div class="loading-message">Loading images...</div>
+      </div>
+      <button class="arrow arrow-right">&#9654;</button>
+    </div>
+
+    <div class="gallery-indicators" id="indicators"></div>
   </section>
 
-  <!-- Hobbies Section -->
-  <section class="mosaic-section hobbies-section" aria-labelledby="hobbies-heading">
-    <header class="section-title">
-      <h2 id="hobbies-heading">Hobbies &amp; Interests</h2>
-    </header>
+  <section class="mosaic-section hobbies-section">
+    <div class="section-title">
+      <h2>Hobbies & Interests</h2>
+    </div>
     <ul class="mosaic-list">
       <li>Photography</li>
       <li>Traveling</li>
@@ -45,15 +27,118 @@
     </ul>
   </section>
 
-  <!-- Awards Section -->
-  <section class="mosaic-section awards-section" aria-labelledby="awards-heading">
-    <header class="section-title">
-      <h2 id="awards-heading">Awards &amp; Recognitions</h2>
-    </header>
+  <section class="mosaic-section awards-section">
+    <div class="section-title">
+      <h2>Awards & Recognitions</h2>
+    </div>
     <ul class="mosaic-list">
       <li>Best Poster Award, IA-AWWA Conference (2024)</li>
     </ul>
   </section>
-</main>
 
-<script src="scripts/mosaic.js" defer></script>
+</div>
+
+<!-- script src="scripts/mosaic.js" defer></script--> 
+
+<script> 
+  document.addEventListener("DOMContentLoaded", () => {
+  const galleryContainer = document.getElementById("photoGallery");
+  const indicatorsContainer = document.getElementById("indicators");
+  const prevArrow = document.querySelector(".arrow-left");
+  const nextArrow = document.querySelector(".arrow-right");
+
+  // Safety guard
+  if (!galleryContainer || !indicatorsContainer || !prevArrow || !nextArrow) {
+    return;
+  }
+
+  // Add image paths (update with actual image URLs or paths)
+  const imagePaths = [
+    'PhotoGallery/1Z0A6122.jpg',
+    'PhotoGallery/20230618_131906.jpg',
+    'PhotoGallery/1000003650.JPEG'
+  ];
+
+  galleryContainer.innerHTML = ''; // Clear loading message
+
+  imagePaths.forEach((src, index) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `Slide ${index + 1}`;
+    img.className = 'gallery-image';
+    galleryContainer.appendChild(img);
+  });
+
+  // Get all gallery images that are already in the DOM
+  const images = Array.from(
+    galleryContainer.querySelectorAll(".gallery-image")
+  );
+
+  if (!images.length) return;
+
+  let slideIndex = 0;
+
+  // Core slide logic (similar to the remembered script)
+  function showSlide(index) {
+    // Wrap around using modulo
+    slideIndex = (index + images.length) % images.length;
+
+    // Update images
+    images.forEach((img, i) => {
+      img.classList.toggle("active", i === slideIndex);
+    });
+
+    // Update indicators
+    const dots = indicatorsContainer.querySelectorAll(".indicator");
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === slideIndex);
+    });
+  }
+
+  function nextSlide() {
+    showSlide(slideIndex + 1);
+  }
+
+  function prevSlide() {
+    showSlide(slideIndex - 1);
+  }
+
+  function initializeIndicators() {
+    indicatorsContainer.innerHTML = "";
+
+    images.forEach((_, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "indicator";
+      dot.setAttribute("aria-label", `Go to slide ${index + 1}`);
+
+      dot.addEventListener("click", () => {
+        showSlide(index);
+      });
+
+      indicatorsContainer.appendChild(dot);
+    });
+  }
+
+  // Correct wiring: left arrow = prevSlide, right arrow = nextSlide
+  prevArrow.addEventListener("click", prevSlide);
+  nextArrow.addEventListener("click", nextSlide);
+
+  // Keyboard navigation
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key === "ArrowRight") nextSlide();
+  });
+
+  // Init
+  initializeIndicators();
+  showSlide(0);
+
+  // Disable arrows if only one image
+  if (images.length <= 1) {
+    prevArrow.disabled = true;
+    nextArrow.disabled = true;
+  }
+});
+
+</script>
