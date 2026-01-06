@@ -1,80 +1,99 @@
-// scripts/mosaic.js
-document.addEventListener('DOMContentLoaded', () => {
-  const galleryPath = './PhotoGallery/';
-  const maxImages = 10;
+document.addEventListener("DOMContentLoaded", () => {
+  const galleryContainer = document.getElementById("photoGallery");
+  const indicatorsContainer = document.getElementById("indicators");
+  const prevArrow = document.querySelector(".arrow-left");
+  const nextArrow = document.querySelector(".arrow-right");
 
-  const availableImages = [
-    'Revanth_Mamidala - Copy.png',
-    'Revanth_Mamidala.png',
-    '1Z0A6122.jpg',
-    '20230618_131906.jpg',
-    '1000003650.JPEG',
-    'Revanth Formal Image.jpeg'
+  // Safety guard
+  if (!galleryContainer || !indicatorsContainer || !prevArrow || !nextArrow) {
+    return;
+  }
+
+  // Add image paths (update with actual image URLs or paths)
+  const imagePaths = [
+    'PhotoGallery/1Z0A6122.jpg',
+    'PhotoGallery/20230618_131906.jpg',
+    'PhotoGallery/1000003650.JPEG'
   ];
 
-  const galleryContainer = document.getElementById('photoGallery');
-  const indicatorsContainer = document.getElementById('indicators');
+  galleryContainer.innerHTML = ''; // Clear loading message
+
+  imagePaths.forEach((src, index) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `Slide ${index + 1}`;
+    img.className = 'gallery-image';
+    galleryContainer.appendChild(img);
+  });
+
+  // Get all gallery images that are already in the DOM
+  const images = Array.from(
+    galleryContainer.querySelectorAll(".gallery-image")
+  );
+
+  if (!images.length) return;
+
   let slideIndex = 0;
-  let images = [];
 
-  function showSlide(n) {
-    if (images.length === 0) return;
+  // Core slide logic (similar to the remembered script)
+  function showSlide(index) {
+    // Wrap around using modulo
+    slideIndex = (index + images.length) % images.length;
 
-    slideIndex = (n + images.length) % images.length;
+    // Update images
+    images.forEach((img, i) => {
+      img.classList.toggle("active", i === slideIndex);
+    });
 
-    images.forEach(img => img.classList.remove('active'));
-    images[slideIndex].classList.add('active');
-
-    document.querySelectorAll('.indicator').forEach((dot, i) => {
-      dot.classList.toggle('active', i === slideIndex);
+    // Update indicators
+    const dots = indicatorsContainer.querySelectorAll(".indicator");
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === slideIndex);
     });
   }
 
-  function nextSlide() { showSlide(slideIndex + 1); }
-  function prevSlide() { showSlide(slideIndex - 1); }
-
-  function goToSlide(n) { showSlide(n); }
-
-  function shuffleArray(arr) {
-    const copy = [...arr];
-    for (let i = copy.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [copy[i], copy[j]] = [copy[j], copy[i]];
-    }
-    return copy;
+  function nextSlide() {
+    showSlide(slideIndex + 1);
   }
 
-  function initializeGallery() {
-    const selectedImages = shuffleArray(availableImages).slice(0, maxImages);
-    galleryContainer.innerHTML = '';
-    images = [];
+  function prevSlide() {
+    showSlide(slideIndex - 1);
+  }
 
-    selectedImages.forEach((file, idx) => {
-      const img = document.createElement('img');
-      img.src = `${galleryPath}${file}`;
-      img.alt = `Gallery Image ${idx + 1}`;
-      img.className = 'gallery-image';
-      if (idx === 0) img.classList.add('active');
-      galleryContainer.appendChild(img);
-      images.push(img);
-    });
+  function initializeIndicators() {
+    indicatorsContainer.innerHTML = "";
 
-    // Create indicators
-    indicatorsContainer.innerHTML = '';
-    selectedImages.forEach((_, i) => {
-      const dot = document.createElement('div');
-      dot.className = 'indicator' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', () => goToSlide(i));
+    images.forEach((_, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "indicator";
+      dot.setAttribute("aria-label", `Go to slide ${index + 1}`);
+
+      dot.addEventListener("click", () => {
+        showSlide(index);
+      });
+
       indicatorsContainer.appendChild(dot);
     });
   }
 
-  document.querySelector('.arrow-left').addEventListener('click', prevSlide);
-  document.querySelector('.arrow-right').addEventListener('click', nextSlide);
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft') prevSlide();
-    if (e.key === 'ArrowRight') nextSlide();
+  // Correct wiring: left arrow = prevSlide, right arrow = nextSlide
+  prevArrow.addEventListener("click", prevSlide);
+  nextArrow.addEventListener("click", nextSlide);
+
+  // Keyboard navigation
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") prevSlide();
+    if (e.key === "ArrowRight") nextSlide();
   });
 
-  initializeGallery();
+  // Init
+  initializeIndicators();
+  showSlide(0);
+
+  // Disable arrows if only one image
+  if (images.length <= 1) {
+    prevArrow.disabled = true;
+    nextArrow.disabled = true;
+  }
 });

@@ -1,0 +1,30 @@
+Counting objects: 100% (13/13), done.
+Delta compression using up to 32 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (7/7), 4.02 KiB | 4.02 MiB/s, done.
+Total 7 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/RevanthMamidala/RevanthMamidala.github.io.git
+   63b1b78..8ce45cc  work_in_progress -> work_in_progress
+PS C:\Users\mrevanth\Documents\RevanthMamidala.github.io> git checkout work_in_progress
+M       mosaic.html
+M       scripts/mosaic.js
+M       styles/main.css
+Already on 'work_in_progress'
+Your branch is up to date with 'origin/work_in_progress'.
+PS C:\Users\mrevanth\Documents\RevanthMamidala.github.io> git add .
+PS C:\Users\mrevanth\Documents\RevanthMamidala.github.io> git commit -m "added working html"
+[work_in_progress f8e0a19] added working html
+ 4 files changed, 581 insertions(+), 281 deletions(-)
+ create mode 100644 mosaic_Gallery_Test.html
+PS C:\Users\mrevanth\Documents\RevanthMamidala.github.io> git push
+Enumerating objects: 14, done.
+Counting objects: 100% (14/14), done.
+Delta compression using up to 32 threads
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (8/8), 4.20 KiB | 4.20 MiB/s, done.
+Total 8 (delta 4), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (4/4), completed with 3 local objects.
+To https://github.com/RevanthMamidala/RevanthMamidala.github.io.git
+   8ce45cc..f8e0a19  work_in_progress -> work_in_progress
+PS C:\Users\mrevanth\Documents\RevanthMamidala.github.io>
